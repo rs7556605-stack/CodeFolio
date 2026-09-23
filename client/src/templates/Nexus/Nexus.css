@@ -1,0 +1,1476 @@
+/* =====================================================
+   NEXUS TEMPLATE
+===================================================== */
+
+.nexus {
+  min-height: 100vh;
+  background:
+    radial-gradient(
+      circle at 15% 10%,
+      rgba(217, 217, 221, 0.16),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 85% 20%,
+      rgba(168, 85, 247, 0.12),
+      transparent 28%
+    ),
+    #bac1d9;
+
+  color: #f8fafc;
+
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  overflow-x: hidden;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.nexus-header {
+  width: 100%;
+  max-width: 1250px;
+  margin: auto;
+
+  padding: 24px 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.nexus-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  font-size: 20px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: #111827;
+}
+
+.nexus-logo-icon {
+  color: #8b5cf6;
+  font-weight: 900;
+}
+
+.nexus-username {
+  color: black ;
+  font-size: 18px;
+font-weight: bold;
+}
+
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.nexus-hero {
+  max-width: 1250px;
+  min-height: 620px;
+
+  margin: auto;
+  padding: 90px 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 70px;
+}
+
+.nexus-hero-content {
+  max-width: 720px;
+
+}
+
+.nexus-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+
+  padding: 8px 13px;
+
+  border: 1px solid black;
+  border-radius: 999px;
+
+  color: black;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 1px;
+}
+
+
+
+.nexus-hero h1 {
+  margin: 25px 0 10px;
+
+  font-size: clamp(32px, 5vw, 76px);
+  line-height: 1.05;
+
+  font-weight: 400;
+
+  letter-spacing: -3px;
+  color:white;
+}
+
+.nexus-hero h1 strong {
+  display: block;
+
+  background:
+    linear-gradient(
+      90deg,
+      #a78bfa,
+      #6366f1,
+      #c084fc
+    );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  color: white;
+  font-weight: 400;
+}
+
+.nexus-hero h2 {
+  margin: 18px 0;
+
+  color: #808fa0;
+
+  font-size: clamp(20px, 3vw, 30px);
+  font-weight: 400;
+  line-height: 2;
+}
+
+.nexus-bio {
+  max-width: 650px;
+
+  color:black;
+
+  font-size: 17px;
+  line-height: 1.8;
+}
+
+
+/* =====================================================
+   HERO BUTTONS
+===================================================== */
+
+.nexus-hero-buttons {
+  margin-top: 30px;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.nexus-primary-btn,
+.nexus-secondary-btn {
+  padding: 5px 10px;
+
+  border-radius: 10px;
+
+  text-decoration: none;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.nexus-primary-btn {
+  background: #6366f1;
+  color: white;
+}
+
+.nexus-primary-btn:hover {
+  transform: translateY(-3px);
+  background: #4f46e5;
+}
+
+.nexus-secondary-btn {
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #e2e8f0;
+   background: #6366f1;
+}
+
+.nexus-secondary-btn:hover {
+  transform: translateY(-3px);
+  border-color: #8b5cf6;
+}
+
+
+/* =====================================================
+   SOCIALS
+===================================================== */
+
+.nexus-socials {
+  margin-top: 25px;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
+.nexus-socials a {
+  color: black;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  text-decoration: none;
+
+  transition: color 0.2s ease;
+}
+
+.nexus-socials a:hover {
+  color: #a78bfa;
+}
+
+
+/* =====================================================
+   PROFILE
+===================================================== */
+
+.nexus-profile-wrapper {
+  position: relative;
+
+  width: 350px;
+  height: 350px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nexus-profile-glow {
+  position: absolute;
+
+  width: 280px;
+  height: 280px;
+
+  border-radius: 50%;
+
+  background:
+    linear-gradient(
+      135deg,
+      #6366f1,
+      #a855f7
+    );
+
+  filter: blur(70px);
+
+  opacity: 0.35;
+}
+
+.nexus-profile-image,
+.nexus-profile-placeholder {
+  position: relative;
+
+  width: 280px;
+  height: 280px;
+
+  border-radius: 50%;
+
+  object-fit: cover;
+
+  border: 2px solid rgba(167, 139, 250, 0.5);
+
+  box-shadow:
+    0 0 0 10px rgba(99, 102, 241, 0.05),
+    0 20px 80px rgba(0, 0, 0, 0.5);
+}
+
+.nexus-profile-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background:
+    linear-gradient(
+      135deg,
+      #312e81,
+      #581c87
+    );
+
+  color: white;
+
+  font-size: 100px;
+  font-weight: 800;
+}
+
+
+/* =====================================================
+   STATS
+===================================================== */
+
+.nexus-stats {
+  max-width: 1190px;
+
+  margin: 0 auto 80px;
+  padding: 15px 20px;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+}
+
+.nexus-stat {
+  padding: 15px;
+
+  text-align: center;
+
+  border-right: 2px solid black;
+}
+
+.nexus-stat:last-child {
+  border-right: none;
+}
+
+.nexus-stat strong {
+  display: block;
+
+  font-size: 30px;
+
+  color: #734fdf;
+}
+
+.nexus-stat span {
+  display: block;
+
+  margin-top: 5px;
+
+  color: black;
+
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+
+/* =====================================================
+   COMMON SECTION
+===================================================== */
+
+.nexus-section {
+  max-width: 1190px;
+
+  margin: auto;
+
+  padding: 80px 30px;
+}
+
+.nexus-section-heading {
+  margin-bottom: 45px;
+  color: white;
+}
+
+.nexus-label {
+  color: #8b5cf6;
+
+  font-size: 11px;
+  font-weight: 800;
+
+  letter-spacing: 2px;
+}
+
+.nexus-section-heading h2 {
+  margin: 30px 0;
+
+  font-size: clamp(30px, 5vw, 48px);
+
+  letter-spacing: -1.5px;
+  
+}
+
+.nexus-section-heading p {
+  max-width: 650px;
+
+  color: black;
+
+  line-height: 2.7;
+}
+
+
+/* =====================================================
+   SKILLS
+===================================================== */
+
+.nexus-skills {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 16px;
+  
+}
+
+.nexus-skill-card {
+  padding: 24px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius: 16px;
+
+  background:
+   rgba(0, 0, 0, 0.703);
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.nexus-skill-card:hover {
+  transform: translateY(-5px);
+
+  border-color:
+    rgba(139, 92, 246, 0.5);
+}
+
+.nexus-skill-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nexus-skill-dot {
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+
+  background: #8b5cf6;
+}
+
+.nexus-skill-category {
+  color: #c0c8d3;
+
+  font-size: 10px;
+  font-weight: 800;
+
+  text-transform: uppercase;
+  letter-spacing: 1px;
+
+}
+
+.nexus-skill-card h3 {
+  margin: 22px 0 10px;
+
+  font-size: 20px;
+}
+
+.nexus-skill-level {
+  color: #94a3b8;
+
+  font-size: 12px;
+}
+
+
+/* =====================================================
+   PROJECTS
+===================================================== */
+
+.nexus-projects {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 24px;
+
+}
+
+.nexus-project-card {
+  position: relative;
+
+  overflow: hidden;
+
+  border:
+    2px solid black;
+
+  border-radius: 20px;
+
+  background:
+    rgba(255, 255, 255, 0.025);
+
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.nexus-project-card:hover {
+  transform: translateY(-7px);
+
+  border-color:
+    rgba(139, 92, 246, 0.45);
+}
+
+.nexus-project-number {
+  position: absolute;
+
+  top: 16px;
+  right: 18px;
+
+  z-index: 2;
+
+  color: rgba(246, 238, 238, 0.55);
+
+  font-size: 12px;
+  font-weight: 800;
+
+  letter-spacing: 1px;
+}
+
+
+/* =====================================================
+   PROJECT IMAGE
+===================================================== */
+
+.nexus-project-image-wrapper {
+  width: 100%;
+  height: 260px;
+
+  overflow: hidden;
+
+  background: #111827;
+}
+
+.nexus-project-image {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  transition: transform 0.4s ease;
+}
+
+.nexus-project-card:hover
+.nexus-project-image {
+  transform: scale(1.05);
+}
+
+.nexus-project-no-image {
+  height: 200px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background:
+    linear-gradient(
+      135deg,
+      #111827,
+      #1e1b4b
+    );
+
+  
+
+  font-size: 14px;
+  font-weight: 800;
+}
+
+
+/* =====================================================
+   PROJECT CONTENT
+===================================================== */
+
+.nexus-project-content {
+  padding: 28px;
+}
+
+.nexus-project-content h3 {
+  margin: 0;
+
+  font-size: 25px;
+}
+
+.nexus-project-category {
+  display: inline-block;
+
+  margin-top: 12px;
+  padding: 6px 10px;
+
+  border-radius: 999px;
+
+  background:
+    rgba(139, 92, 246, 0.12);
+
+  border:
+    2px solid rgba(139, 92, 246, 0.25);
+
+  color: white;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+}
+
+.nexus-project-content > p {
+  margin: 18px 0;
+
+  color: black;
+font-weight: 500;
+  line-height: 1.7;
+}
+
+
+/* =====================================================
+   TECH STACK
+===================================================== */
+
+.nexus-tech {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 8px;
+}
+
+.nexus-tech span {
+  padding: 7px 10px;
+
+  border-radius: 7px;
+
+  background:
+    rgba(55, 5, 174, 0.12);
+
+  border:
+    2px solid rgba(139, 92, 246, 0.25);
+;
+
+  font-size: 13px;
+  color: navy;
+}
+
+
+/* =====================================================
+   PROJECT LINKS
+===================================================== */
+
+.nexus-project-links {
+  margin-top: 24px;
+
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 16px;
+}
+
+.nexus-project-links a {
+  color: #a78bfa;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  text-decoration: none;
+}
+
+.nexus-project-links a:hover {
+  color: #c4b5fd;
+}
+
+
+/* =====================================================
+   EMPTY
+===================================================== */
+
+.nexus-empty {
+  color: #64748b;
+
+  padding: 25px 0;
+}
+
+
+/* =====================================================
+   CONTACT
+===================================================== */
+
+.nexus-contact {
+  max-width: 1190px;
+
+  margin: 70px auto 0;
+
+  padding: 80px 30px;
+
+  display: grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap: 70px;
+
+  border-top:
+    1px solid rgba(255, 255, 255, 0.08);
+}
+
+.nexus-contact-content h2 {
+  margin: 15px 0;
+
+  font-size: clamp(36px, 5vw, 58px);
+
+  line-height: 1.05;
+
+  letter-spacing: -2px;
+}
+
+.nexus-contact-content h2 span {
+  color: #8b5cf6;
+}
+
+.nexus-contact-content p {
+  max-width: 450px;
+
+  color: #64748b;
+
+  line-height: 1.7;
+}
+
+.nexus-contact-form {
+  min-width: 0;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.nexus-footer {
+  max-width: 1190px;
+
+  margin: auto;
+
+  padding: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border-top:
+    1px solid rgba(255, 255, 255, 0.08);
+
+  color: black;
+
+  font-size: 12px;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+   DESKTOP DESIGN PRESERVED ON MOBILE
+===================================================== */
+
+@media (max-width: 900px) {
+
+  /* =========================
+     HEADER
+  ========================= */
+
+  .nexus-header {
+    width: 100%;
+    max-width: 100%;
+    padding: 18px 20px;
+    box-sizing: border-box;
+  }
+
+  .nexus-logo {
+    font-size: 18px;
+  }
+
+  .nexus-username {
+    font-size: 13px;
+  }
+
+
+  /* =========================
+     HERO
+     KEEP LEFT + RIGHT
+  ========================= */
+
+  .nexus-hero {
+    width: 100%;
+    max-width: 100%;
+
+    min-height: auto;
+
+    padding: 55px 20px 60px;
+
+    display: flex;
+    flex-direction: row;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 25px;
+
+    box-sizing: border-box;
+  }
+
+  .nexus-hero-content {
+    width: 55%;
+    max-width: none;
+
+    flex: 1 1 55%;
+  }
+
+
+  /* =========================
+     PROFILE
+  ========================= */
+
+  .nexus-profile-wrapper {
+    width: 40%;
+    height: auto;
+
+    flex: 0 0 40%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .nexus-profile-image,
+  .nexus-profile-placeholder {
+    width: min(220px, 100%);
+    height: auto;
+    aspect-ratio: 1 / 1;
+  }
+
+  .nexus-profile-placeholder {
+    font-size: 65px;
+  }
+
+
+  /* =========================
+     HERO HEADING
+  ========================= */
+
+  .nexus-hero h1 {
+    font-size: clamp(34px, 7vw, 58px);
+
+    line-height: 1.05;
+
+    letter-spacing: -2px;
+
+    margin: 20px 0 10px;
+  }
+
+  .nexus-hero h2 {
+    font-size: clamp(17px, 3vw, 25px);
+
+    line-height: 1.4;
+
+    margin: 15px 0;
+  }
+
+  .nexus-bio {
+    max-width: 100%;
+
+    font-size: 15px;
+
+    line-height: 1.6;
+  }
+
+
+  /* =========================
+     BUTTONS
+  ========================= */
+
+  .nexus-hero-buttons {
+    display: flex;
+
+    flex-direction: row;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    margin-top: 20px;
+  }
+
+  .nexus-primary-btn,
+  .nexus-secondary-btn {
+    padding: 8px 12px;
+
+    font-size: 12px;
+  }
+
+
+  /* =========================
+     SOCIAL LINKS
+  ========================= */
+
+  .nexus-socials {
+    display: flex;
+
+    flex-direction: row;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    margin-top: 20px;
+  }
+
+  .nexus-socials a {
+    font-size: 12px;
+  }
+
+
+  /* =========================
+     STATS
+  ========================= */
+
+  .nexus-stats {
+    width: calc(100% - 30px);
+
+    margin: 0 auto 55px;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    padding: 10px;
+
+    box-sizing: border-box;
+  }
+
+  .nexus-stat {
+    padding: 10px 5px;
+  }
+
+  .nexus-stat strong {
+    font-size: 23px;
+  }
+
+  .nexus-stat span {
+    font-size: 8px;
+  }
+
+
+  /* =========================
+     SECTIONS
+  ========================= */
+
+  .nexus-section {
+    width: 100%;
+    max-width: 100%;
+
+    padding: 55px 20px;
+
+    box-sizing: border-box;
+  }
+
+
+  /* =========================
+     SKILLS
+  ========================= */
+
+  .nexus-skills {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 12px;
+  }
+
+  .nexus-skill-card {
+    padding: 18px;
+  }
+
+
+  /* =========================
+     PROJECTS
+  ========================= */
+
+  .nexus-projects {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 15px;
+  }
+
+  .nexus-project-card {
+    min-width: 0;
+  }
+
+  .nexus-project-image-wrapper {
+    height: 180px;
+  }
+
+  .nexus-project-content {
+    padding: 18px;
+  }
+
+  .nexus-project-content h3 {
+    font-size: 20px;
+  }
+
+
+  /* =========================
+     CONTACT
+  ========================= */
+
+  .nexus-contact {
+    width: 100%;
+    max-width: 100%;
+
+    padding: 55px 20px;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 30px;
+
+    box-sizing: border-box;
+  }
+
+
+  /* =========================
+     FOOTER
+  ========================= */
+
+  .nexus-footer {
+    width: 100%;
+    max-width: 100%;
+
+    padding: 25px 20px;
+
+    box-sizing: border-box;
+  }
+}
+
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width: 500px) {
+
+  .nexus-header {
+    padding: 15px 12px;
+  }
+
+  .nexus-logo {
+    font-size: 16px;
+  }
+
+  .nexus-username {
+    font-size: 11px;
+  }
+
+
+  /* KEEP HERO SIDE BY SIDE */
+
+  .nexus-hero {
+    padding: 40px 12px 45px;
+
+    gap: 10px;
+
+    align-items: center;
+  }
+
+  .nexus-hero-content {
+    width: 58%;
+    flex-basis: 58%;
+  }
+
+  .nexus-profile-wrapper {
+    width: 42%;
+    flex-basis: 42%;
+  }
+
+
+  /* IMAGE */
+
+  .nexus-profile-image,
+  .nexus-profile-placeholder {
+    width: 100%;
+    max-width: 155px;
+  }
+
+  .nexus-profile-placeholder {
+    font-size: 45px;
+  }
+
+
+  /* HERO TEXT */
+
+  .nexus-hero h1 {
+    font-size: clamp(28px, 9vw, 42px);
+
+    letter-spacing: -1.5px;
+
+    margin: 12px 0 8px;
+  }
+
+  .nexus-hero h2 {
+    font-size: 17px;
+
+    line-height: 1.35;
+
+    margin: 10px 0;
+  }
+
+  .nexus-bio {
+    font-size: 13px;
+
+    line-height: 1.5;
+  }
+
+
+  /* STATUS */
+
+  .nexus-status {
+    padding: 6px 9px;
+
+    font-size: 8px;
+
+    letter-spacing: .7px;
+  }
+
+
+  /* BUTTONS */
+
+  .nexus-hero-buttons {
+    gap: 5px;
+
+    margin-top: 14px;
+  }
+
+  .nexus-primary-btn,
+  .nexus-secondary-btn {
+    padding: 7px 9px;
+
+    font-size: 10px;
+  }
+
+
+  /* SOCIALS */
+
+  .nexus-socials {
+    gap: 7px;
+
+    margin-top: 14px;
+  }
+
+  .nexus-socials a {
+    font-size: 10px;
+  }
+
+
+  /* STATS */
+
+  .nexus-stats {
+    width: calc(100% - 20px);
+
+    padding: 7px 3px;
+  }
+
+  .nexus-stat {
+    padding: 8px 3px;
+  }
+
+  .nexus-stat strong {
+    font-size: 19px;
+  }
+
+  .nexus-stat span {
+    font-size: 7px;
+  }
+
+
+  /* SECTIONS */
+
+
+
+  /* SKILLS */
+
+  .nexus-skills {
+    grid-template-columns: 1fr 1fr;
+
+    gap: 8px;
+  }
+
+  .nexus-skill-card {
+    padding: 14px;
+  }
+
+
+/* =========================================
+   MOBILE PROJECTS - HORIZONTAL
+========================================= */
+
+@media (max-width: 650px) {
+
+  .nexus-section {
+    padding: 40px 12px;
+  }
+
+  .nexus-section-heading {
+    margin-bottom: 18px;
+  }
+
+  .nexus-section-heading h2 {
+    margin: 8px 0 10px;
+
+    font-size: 30px;
+
+    line-height: 1.1;
+  }
+
+  .nexus-section-heading p {
+    margin: 0 auto;
+
+    max-width: 95%;
+
+    font-size: 14px;
+
+    line-height: 1.45;
+  }
+
+
+  /* PROJECTS SIDE BY SIDE */
+
+  .nexus-projects {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 10px;
+  }
+
+
+  /* PROJECT CARD */
+
+  .nexus-project-card {
+    width: 100%;
+
+    min-width: 0;
+
+    border-radius: 18px;
+
+    box-sizing: border-box;
+  }
+
+
+  /* PROJECT IMAGE */
+
+  .nexus-project-image-wrapper {
+    width: 100%;
+
+    height: 150px;
+  }
+
+
+  /* PROJECT CONTENT */
+
+  .nexus-project-content {
+    padding: 14px;
+  }
+
+  .nexus-project-content h3 {
+    margin: 0;
+
+    font-size: 17px;
+
+    line-height: 1.25;
+
+    word-break: break-word;
+  }
+
+
+  /* CATEGORY */
+
+  .nexus-project-category {
+    margin-top: 8px;
+
+    padding: 5px 8px;
+
+    font-size: 9px;
+
+    letter-spacing: 0.5px;
+  }
+
+
+  /* DESCRIPTION */
+
+  .nexus-project-content > p {
+    margin: 10px 0;
+
+    font-size: 13px;
+
+    line-height: 1.45;
+
+    word-break: break-word;
+  }
+
+
+  /* TECH STACK */
+
+  .nexus-tech {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 5px;
+  }
+
+  .nexus-tech span {
+    padding: 5px 7px;
+
+    font-size: 10px;
+
+    border-width: 1px;
+  }
+
+
+  /* PROJECT LINKS */
+
+  .nexus-project-links {
+    margin-top: 12px;
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+  }
+
+  .nexus-project-links a {
+    font-size: 11px;
+  }
+}
+
+  /* CONTACT */
+
+  .nexus-contact {
+    padding: 45px 12px;
+
+    gap: 15px;
+  }
+
+  .nexus-contact-content h2 {
+    font-size: 30px;
+  }
+
+
+  /* FOOTER */
+
+  .nexus-footer {
+    padding: 20px 12px;
+
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 400px) {
+
+  .nexus-section {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .nexus-section-heading {
+    margin-bottom: 15px;
+  }
+
+  .nexus-section-heading h2 {
+    font-size: 27px;
+
+    margin: 5px 0 8px;
+  }
+
+  .nexus-section-heading p {
+    font-size: 13px;
+
+    line-height: 1.4;
+
+    max-width: 96%;
+  }
+
+
+  /* KEEP TWO PROJECTS HORIZONTAL */
+
+  .nexus-projects {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 7px;
+  }
+
+
+  .nexus-project-card {
+    border-radius: 14px;
+  }
+
+
+  .nexus-project-image-wrapper {
+    height: 125px;
+  }
+
+
+  .nexus-project-content {
+    padding: 10px;
+  }
+
+
+  .nexus-project-content h3 {
+    font-size: 15px;
+  }
+
+
+  .nexus-project-category {
+    font-size: 8px;
+
+    padding: 4px 6px;
+  }
+
+
+  .nexus-project-content > p {
+    font-size: 11px;
+
+    line-height: 1.4;
+
+    margin: 8px 0;
+  }
+
+
+  .nexus-tech {
+    gap: 4px;
+  }
+
+
+  .nexus-tech span {
+    padding: 4px 5px;
+
+    font-size: 9px;
+  }
+
+
+  .nexus-project-links {
+    gap: 6px;
+
+    margin-top: 9px;
+  }
+
+  .nexus-project-links a {
+    font-size: 10px;
+  }
+}

@@ -1,0 +1,1672 @@
+/* =====================================================
+   CORPORATE TEMPLATE
+===================================================== */
+
+.corporate {
+  min-height: 100vh;
+
+  background: #f8fafc;
+
+  color: #172033;
+
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  overflow-x: hidden;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.corporate-header {
+  width: 100%;
+
+  background: #ffffff;
+
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.corporate-header-inner {
+  max-width: 1180px;
+
+  margin: auto;
+
+  padding: 22px 30px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+}
+
+.corporate-logo {
+  font-size: 15px;
+
+  font-weight: 700;
+
+  letter-spacing: -0.5px;
+}
+
+.corporate-username {
+  color: #64748b;
+
+  font-size: 13px;
+
+  font-weight: 600;
+}
+
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.corporate-hero {
+  background: #ffffff;
+
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.corporate-hero-inner {
+  max-width: 1180px;
+
+  min-height: 570px;
+
+  margin: auto;
+
+  padding: 80px 30px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 70px;
+}
+
+.corporate-hero-content {
+  max-width: 700px;
+}
+
+.corporate-eyebrow {
+  display: inline-block;
+
+  color: #2563eb;
+
+  font-size: 11px;
+
+  font-weight: 800;
+
+  letter-spacing: 2px;
+}
+
+.corporate-hero h1 {
+  margin: 18px 0 8px;
+
+  font-size: clamp(48px, 7vw, 78px);
+
+  line-height: 1;
+
+  letter-spacing: -3px;
+
+  color: #0f172a;
+}
+
+.corporate-hero h2 {
+  margin: 18px 0;
+
+  color: #475569;
+
+  font-size: clamp(21px, 3vw, 30px);
+
+  font-weight: 500;
+}
+
+.corporate-bio {
+  max-width: 650px;
+
+  color: #64748b;
+
+  font-size: 17px;
+
+  line-height: 1.8;
+}
+
+
+/* =====================================================
+   ACTIONS
+===================================================== */
+
+.corporate-actions {
+  margin-top: 30px;
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 12px;
+}
+
+.corporate-primary-btn,
+.corporate-secondary-btn {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 13px 20px;
+
+  border-radius: 8px;
+
+  text-decoration: none;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease;
+}
+
+.corporate-primary-btn {
+  background: #2563eb;
+
+  color: #ffffff;
+}
+
+.corporate-primary-btn:hover {
+  transform: translateY(-2px);
+
+  background: #1d4ed8;
+}
+
+.corporate-secondary-btn {
+  border: 1px solid #cbd5e1;
+
+  background: #ffffff;
+
+  color: #334155;
+}
+
+.corporate-secondary-btn:hover {
+  transform: translateY(-2px);
+
+  background: #f8fafc;
+}
+
+
+/* =====================================================
+   SOCIALS
+===================================================== */
+
+.corporate-socials {
+  margin-top: 24px;
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 20px;
+}
+
+.corporate-socials a {
+  color: #64748b;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  text-decoration: none;
+}
+
+.corporate-socials a:hover {
+  color: #2563eb;
+}
+
+
+/* =====================================================
+   PROFILE
+===================================================== */
+
+.corporate-profile {
+  width: 320px;
+
+  height: 320px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+}
+
+.corporate-profile-image,
+.corporate-profile-placeholder {
+  width: 280px;
+
+  height: 280px;
+
+  border-radius: 18px;
+
+  object-fit: cover;
+
+  border: 1px solid #dbeafe;
+
+  box-shadow:
+    0 25px 60px rgba(15, 23, 42, 0.12);
+}
+
+.corporate-profile-placeholder {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  background: #eff6ff;
+
+  color: #2563eb;
+
+  font-size: 100px;
+
+  font-weight: 800;
+}
+
+
+/* =====================================================
+   QUICK INFO
+===================================================== */
+
+.corporate-info {
+  max-width: 1120px;
+
+  margin: 55px auto 0;
+
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  background: #ffffff;
+
+  border: 1px solid #e2e8f0;
+
+  border-radius: 12px;
+
+  overflow: hidden;
+}
+
+.corporate-info-card {
+  padding: 26px;
+
+  text-align: center;
+
+  border-right: 1px solid #e2e8f0;
+}
+
+.corporate-info-card:last-child {
+  border-right: none;
+}
+
+.corporate-info-card span {
+  display: block;
+
+  color: #94a3b8;
+
+  font-size: 10px;
+
+  font-weight: 800;
+
+  letter-spacing: 1.5px;
+}
+
+.corporate-info-card strong {
+  display: block;
+
+  margin-top: 8px;
+
+  color: #0f172a;
+
+  font-size: 25px;
+}
+
+
+/* =====================================================
+   COMMON SECTION
+===================================================== */
+
+.corporate-section {
+  max-width: 1120px;
+
+  margin: auto;
+
+  padding: 90px 30px 30px;
+}
+
+.corporate-section-heading {
+  margin-bottom: 35px;
+}
+
+.corporate-section-heading > span,
+.corporate-contact-text > span {
+  color: #2563eb;
+
+  font-size: 11px;
+
+  font-weight: 800;
+
+  letter-spacing: 2px;
+}
+
+.corporate-section-heading h2 {
+  margin: 12px 0 0;
+
+  color: #0f172a;
+
+  font-size: clamp(30px, 5vw, 45px);
+
+  letter-spacing: -1.5px;
+}
+
+
+/* =====================================================
+   ABOUT
+===================================================== */
+
+.corporate-about {
+  max-width: 800px;
+
+  padding: 28px;
+
+  background: #ffffff;
+
+  border: 1px solid #e2e8f0;
+
+  border-left: 4px solid #2563eb;
+
+  border-radius: 10px;
+}
+
+.corporate-about p {
+  margin: 0;
+
+  color: #64748b;
+
+  font-size: 16px;
+
+  line-height: 1.9;
+}
+
+
+/* =====================================================
+   SKILLS
+===================================================== */
+
+.corporate-skills {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 14px;
+}
+
+.corporate-skill {
+  padding: 22px;
+
+  background: #ffffff;
+
+  border: 1px solid #e2e8f0;
+
+  border-radius: 10px;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.corporate-skill:hover {
+  transform: translateY(-4px);
+
+  box-shadow:
+    0 15px 35px rgba(15, 23, 42, 0.08);
+}
+
+.corporate-skill-header {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 10px;
+}
+
+.corporate-skill h3 {
+  margin: 0;
+
+  color: #0f172a;
+
+  font-size: 17px;
+}
+
+.corporate-skill-header span {
+  color: #2563eb;
+
+  font-size: 10px;
+
+  font-weight: 800;
+
+  text-transform: uppercase;
+}
+
+.corporate-skill p {
+  margin: 8px 0 0;
+
+  color: #94a3b8;
+
+  font-size: 12px;
+}
+
+
+/* =====================================================
+   PROJECTS
+===================================================== */
+
+.corporate-projects {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 24px;
+}
+
+.corporate-project {
+  position: relative;
+
+  overflow: hidden;
+
+  background: #ffffff;
+
+  border: 1px solid #e2e8f0;
+
+  border-radius: 14px;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.corporate-project:hover {
+  transform: translateY(-5px);
+
+  box-shadow:
+    0 20px 45px rgba(15, 23, 42, 0.1);
+}
+
+.corporate-project-number {
+  position: absolute;
+
+  top: 15px;
+
+  right: 18px;
+
+  z-index: 2;
+
+  padding: 5px 8px;
+
+  background: rgba(255, 255, 255, 0.92);
+
+  border-radius: 5px;
+
+  color: #64748b;
+
+  font-size: 10px;
+
+  font-weight: 800;
+}
+
+
+/* =====================================================
+   PROJECT IMAGE
+===================================================== */
+
+.corporate-project-image {
+  width: 100%;
+
+  height: 245px;
+
+  overflow: hidden;
+
+  background: #f1f5f9;
+}
+
+.corporate-project-image img {
+  width: 100%;
+
+  height: 100%;
+
+  object-fit: cover;
+
+  transition: transform 0.35s ease;
+}
+
+.corporate-project:hover
+.corporate-project-image img {
+  transform: scale(1.04);
+}
+
+.corporate-project-placeholder {
+  width: 100%;
+
+  height: 100%;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  color: #94a3b8;
+
+  font-size: 13px;
+
+  font-weight: 800;
+
+  letter-spacing: 1px;
+}
+
+
+/* =====================================================
+   PROJECT CONTENT
+===================================================== */
+
+.corporate-project-content {
+  padding: 26px;
+}
+
+.corporate-project-content h3 {
+  margin: 0;
+
+  color: #0f172a;
+
+  font-size: 23px;
+}
+
+.corporate-project-category {
+  display: inline-block;
+
+  margin-top: 10px;
+
+  padding: 6px 10px;
+
+  background: #eff6ff;
+
+  border: 1px solid #dbeafe;
+
+  border-radius: 999px;
+
+  color: #2563eb;
+
+  font-size: 10px;
+
+  font-weight: 800;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.5px;
+}
+
+.corporate-project-content > p {
+  margin: 16px 0;
+
+  color: #64748b;
+
+  line-height: 1.7;
+
+  font-size: 14px;
+}
+
+
+/* =====================================================
+   TECH
+===================================================== */
+
+.corporate-tech {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 7px;
+}
+
+.corporate-tech span {
+  padding: 6px 9px;
+
+  background: #f8fafc;
+
+  border: 1px solid #e2e8f0;
+
+  border-radius: 5px;
+
+  color: #475569;
+
+  font-size: 10px;
+
+  font-weight: 600;
+}
+
+
+/* =====================================================
+   PROJECT LINKS
+===================================================== */
+
+.corporate-project-links {
+  margin-top: 22px;
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 18px;
+}
+
+.corporate-project-links a {
+  color: #2563eb;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  text-decoration: none;
+}
+
+.corporate-project-links a:hover {
+  color: #1d4ed8;
+}
+
+
+/* =====================================================
+   EMPTY
+===================================================== */
+
+.corporate-empty {
+  color: #94a3b8;
+
+  font-size: 14px;
+}
+
+
+/* =====================================================
+   CONTACT
+===================================================== */
+
+.corporate-contact {
+  margin-top: 80px;
+
+  background: #0f172a;
+
+  color: #ffffff;
+}
+
+.corporate-contact-inner {
+  max-width: 1120px;
+
+  margin: auto;
+
+  padding: 90px 30px;
+
+  display: grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap: 70px;
+}
+
+.corporate-contact-text > span {
+  color: #60a5fa;
+}
+
+.corporate-contact-text h2 {
+  margin: 18px 0;
+  font-size: clamp(28px, 5vw, 55px);
+  line-height: 1;
+  letter-spacing: -2px;
+
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  background-clip: initial !important;
+}
+
+.corporate-contact-text p {
+  max-width: 450px;
+
+  color: #94a3b8;
+margin-top: 50px;
+  line-height: 1.7;
+}
+
+.corporate-contact-form {
+  min-width: 0;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.corporate-footer {
+  max-width: 1120px;
+
+  margin: auto;
+
+  padding: 25px 30px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 15px;
+
+  color: #64748b;
+
+  font-size: 11px;
+}
+
+
+/* =====================================================
+   CORPORATE RESPONSIVE
+   SAME DESKTOP DESIGN + MOBILE FIT
+===================================================== */
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 900px) {
+
+  /* =========================
+     HEADER
+  ========================= */
+
+  .corporate-header-inner {
+    width: 100%;
+    max-width: 100%;
+
+    padding: 20px 20px;
+
+    box-sizing: border-box;
+  }
+
+
+  /* =========================
+     HERO
+     KEEP LEFT + RIGHT
+  ========================= */
+
+  .corporate-hero-inner {
+    width: 100%;
+    max-width: 100%;
+
+    min-height: auto;
+
+    padding: 60px 20px;
+
+    display: flex;
+
+    flex-direction: row;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 25px;
+
+    box-sizing: border-box;
+  }
+
+
+  .corporate-hero-content {
+    width: 58%;
+
+    max-width: none;
+
+    flex: 1 1 58%;
+  }
+
+
+  /* PROFILE */
+
+  .corporate-profile {
+    width: 38%;
+    height: auto;
+
+    flex: 0 0 38%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+  }
+
+  .corporate-profile-image,
+  .corporate-profile-placeholder {
+    width: min(250px, 100%);
+
+    height: auto;
+
+    aspect-ratio: 1 / 1;
+  }
+
+  .corporate-profile-placeholder {
+    font-size: 75px;
+  }
+
+
+  /* HERO TEXT */
+
+  .corporate-hero h1 {
+    font-size: clamp(40px, 7vw, 65px);
+
+    line-height: 1.05;
+
+    letter-spacing: -2px;
+  }
+
+  .corporate-hero h2 {
+    font-size: clamp(19px, 3vw, 27px);
+
+    line-height: 1.35;
+  }
+
+  .corporate-bio {
+    font-size: 15px;
+
+    line-height: 1.6;
+  }
+
+
+  /* BUTTONS */
+
+  .corporate-actions {
+    display: flex;
+
+    flex-direction: row;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    margin-top: 20px;
+  }
+
+  .corporate-primary-btn,
+  .corporate-secondary-btn {
+    padding: 10px 14px;
+
+    font-size: 12px;
+
+    width: auto;
+  }
+
+
+  /* SOCIAL */
+
+  .corporate-socials {
+    display: flex;
+
+    flex-direction: row;
+
+    flex-wrap: wrap;
+
+    gap: 12px;
+
+    margin-top: 18px;
+  }
+
+
+  /* =========================
+     QUICK INFO
+  ========================= */
+
+  .corporate-info {
+    width: calc(100% - 30px);
+
+    margin: 30px auto 0;
+
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .corporate-info-card {
+    padding: 18px 8px;
+  }
+
+  .corporate-info-card strong {
+    font-size: 21px;
+  }
+
+
+  /* =========================
+     SECTION
+  ========================= */
+
+  .corporate-section {
+    width: 100%;
+    max-width: 100%;
+
+    padding: 55px 20px 25px;
+
+    box-sizing: border-box;
+  }
+
+  .corporate-section-heading {
+    margin-bottom: 20px;
+  }
+
+  .corporate-section-heading h2 {
+    margin: 8px 0 0;
+
+    font-size: clamp(28px, 5vw, 42px);
+  }
+
+
+  /* =========================
+     SKILLS
+  ========================= */
+
+  .corporate-skills {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 12px;
+  }
+
+
+  /* =========================
+     PROJECTS
+  ========================= */
+
+  .corporate-projects {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 12px;
+  }
+
+  .corporate-project {
+    min-width: 0;
+
+    width: 100%;
+
+    box-sizing: border-box;
+  }
+
+  .corporate-project-image {
+    height: 190px;
+  }
+
+  .corporate-project-content {
+    padding: 18px;
+  }
+
+  .corporate-project-content h3 {
+    font-size: 20px;
+  }
+
+
+  /* PROJECT DESCRIPTION */
+
+  .corporate-project-content > p {
+    margin: 10px 0;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+  }
+
+
+  /* TECH */
+
+  .corporate-tech {
+    gap: 5px;
+  }
+
+  .corporate-tech span {
+    padding: 5px 7px;
+
+    font-size: 9px;
+  }
+
+
+  /* LINKS */
+
+  .corporate-project-links {
+    margin-top: 15px;
+
+    gap: 10px;
+  }
+
+  .corporate-project-links a {
+    font-size: 11px;
+  }
+
+
+  /* =========================
+     CONTACT
+  ========================= */
+
+  .corporate-contact-inner {
+    padding: 65px 20px;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 30px;
+  }
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 650px) {
+
+  /* =========================
+     HEADER
+  ========================= */
+
+  .corporate-header-inner {
+    padding: 16px 12px;
+
+    display: flex;
+
+    flex-direction: row;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 10px;
+  }
+
+  .corporate-logo {
+    font-size: 16px;
+  }
+
+  .corporate-username {
+    font-size: 10px;
+  }
+
+
+  /* =========================
+     HERO
+     KEEP LEFT + RIGHT
+  ========================= */
+
+  .corporate-hero-inner {
+    padding: 45px 12px 50px;
+
+    gap: 10px;
+
+    align-items: center;
+  }
+
+
+  .corporate-hero-content {
+    width: 58%;
+
+    flex-basis: 58%;
+  }
+
+
+  .corporate-profile {
+    width: 42%;
+
+    flex-basis: 42%;
+  }
+
+
+  /* PROFILE IMAGE */
+
+  .corporate-profile-image,
+  .corporate-profile-placeholder {
+    width: 100%;
+
+    max-width: 175px;
+
+    height: auto;
+
+    aspect-ratio: 1 / 1;
+
+    border-radius: 14px;
+  }
+
+  .corporate-profile-placeholder {
+    font-size: 50px;
+  }
+
+
+  /* HERO */
+
+  .corporate-eyebrow {
+    font-size: 8px;
+
+    letter-spacing: 1px;
+  }
+
+  .corporate-hero h1 {
+    font-size: clamp(28px, 9vw, 42px);
+
+    line-height: 1.05;
+
+    letter-spacing: -1.5px;
+
+    margin: 10px 0 7px;
+  }
+
+  .corporate-hero h2 {
+    font-size: 16px;
+
+    line-height: 1.3;
+
+    margin: 9px 0;
+  }
+
+  .corporate-bio {
+    font-size: 12px;
+
+    line-height: 1.5;
+  }
+
+
+  /* =========================
+     ACTION BUTTONS
+  ========================= */
+
+  .corporate-actions {
+    margin-top: 13px;
+
+    display: flex;
+
+    flex-direction: row;
+
+    flex-wrap: wrap;
+
+    gap: 5px;
+  }
+
+  .corporate-primary-btn,
+  .corporate-secondary-btn {
+    width: auto;
+
+    padding: 7px 9px;
+
+    font-size: 9px;
+
+    border-radius: 6px;
+  }
+
+
+  /* =========================
+     SOCIAL LINKS
+  ========================= */
+
+  .corporate-socials {
+    margin-top: 12px;
+
+    display: flex;
+
+    flex-direction: row;
+
+    flex-wrap: wrap;
+
+    gap: 7px;
+  }
+
+  .corporate-socials a {
+    font-size: 9px;
+  }
+
+
+  /* =========================
+     QUICK INFO
+  ========================= */
+
+  .corporate-info {
+    width: calc(100% - 20px);
+
+    margin: 20px auto 0;
+
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    border-radius: 9px;
+  }
+
+  .corporate-info-card {
+    padding: 12px 4px;
+
+    border-right: 1px solid #e2e8f0;
+
+    border-bottom: none;
+  }
+
+  .corporate-info-card:last-child {
+    border-right: none;
+  }
+
+  .corporate-info-card span {
+    font-size: 7px;
+
+    letter-spacing: .7px;
+  }
+
+  .corporate-info-card strong {
+    margin-top: 5px;
+
+    font-size: 16px;
+  }
+
+
+  /* =========================
+     SECTION
+  ========================= */
+
+  .corporate-section {
+    padding: 45px 12px 20px;
+  }
+
+  .corporate-section-heading {
+    margin-bottom: 17px;
+  }
+
+  .corporate-section-heading > span {
+    font-size: 8px;
+
+    letter-spacing: 1.2px;
+  }
+
+  .corporate-section-heading h2 {
+    margin: 7px 0 0;
+
+    font-size: 29px;
+
+    line-height: 1.1;
+  }
+
+
+  /* =========================
+     ABOUT
+  ========================= */
+
+  .corporate-about {
+    padding: 18px;
+
+    border-left-width: 3px;
+  }
+
+  .corporate-about p {
+    font-size: 13px;
+
+    line-height: 1.6;
+  }
+
+
+  /* =========================
+     SKILLS
+  ========================= */
+
+  .corporate-skills {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 8px;
+  }
+
+  .corporate-skill {
+    padding: 14px;
+  }
+
+  .corporate-skill h3 {
+    font-size: 14px;
+  }
+
+  .corporate-skill-header span {
+    font-size: 8px;
+  }
+
+  .corporate-skill p {
+    font-size: 10px;
+  }
+
+
+  /* =========================
+     PROJECTS
+     KEEP 2 HORIZONTAL
+  ========================= */
+
+  .corporate-projects {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 7px;
+  }
+
+  .corporate-project {
+    min-width: 0;
+
+    border-radius: 12px;
+  }
+
+
+  /* IMAGE */
+
+  .corporate-project-image {
+    height: 145px;
+  }
+
+
+  /* CONTENT */
+
+  .corporate-project-content {
+    padding: 12px;
+  }
+
+  .corporate-project-content h3 {
+    font-size: 16px;
+
+    line-height: 1.2;
+
+    word-break: break-word;
+  }
+
+
+  /* CATEGORY */
+
+  .corporate-project-category {
+    margin-top: 7px;
+
+    padding: 4px 6px;
+
+    font-size: 8px;
+
+    letter-spacing: .3px;
+  }
+
+
+  /* DESCRIPTION */
+
+  .corporate-project-content > p {
+    margin: 8px 0;
+
+    font-size: 11px;
+
+    line-height: 1.4;
+  }
+
+
+  /* TECH */
+
+  .corporate-tech {
+    gap: 4px;
+  }
+
+  .corporate-tech span {
+    padding: 4px 5px;
+
+    font-size: 8px;
+  }
+
+
+  /* LINKS */
+
+  .corporate-project-links {
+    margin-top: 9px;
+
+    gap: 7px;
+  }
+
+  .corporate-project-links a {
+    font-size: 9px;
+  }
+
+
+  /* =========================
+     CONTACT
+  ========================= */
+
+  .corporate-contact {
+    margin-top: 45px;
+  }
+
+  .corporate-contact-inner {
+    padding: 50px 12px;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 15px;
+  }
+
+  .corporate-contact-text h2 {
+    font-size: 31px;
+
+    line-height: 1;
+  }
+
+  .corporate-contact-text p {
+    margin-top: 25px;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+  }
+
+
+  /* =========================
+     FOOTER
+  ========================= */
+
+  .corporate-footer {
+    padding: 20px 12px;
+
+    flex-direction: row;
+
+    justify-content: space-between;
+
+    text-align: left;
+
+    gap: 8px;
+  }
+}
+
+
+/* =====================================================
+   VERY SMALL MOBILE
+===================================================== */
+
+@media (max-width: 400px) {
+
+  .corporate-header-inner {
+    padding: 14px 10px;
+  }
+
+  .corporate-logo {
+    font-size: 15px;
+  }
+
+  .corporate-username {
+    font-size: 9px;
+  }
+
+
+  /* HERO STILL SIDE-BY-SIDE */
+
+  .corporate-hero-inner {
+    padding: 38px 10px 42px;
+
+    gap: 7px;
+  }
+
+  .corporate-hero-content {
+    width: 59%;
+    flex-basis: 59%;
+  }
+
+  .corporate-profile {
+    width: 41%;
+    flex-basis: 41%;
+  }
+
+
+  .corporate-profile-image,
+  .corporate-profile-placeholder {
+    max-width: 145px;
+  }
+
+
+  .corporate-hero h1 {
+    font-size: 29px;
+  }
+
+  .corporate-hero h2 {
+    font-size: 14px;
+  }
+
+  .corporate-bio {
+    font-size: 11px;
+  }
+
+
+  /* BUTTONS */
+
+  .corporate-primary-btn,
+  .corporate-secondary-btn {
+    padding: 6px 7px;
+
+    font-size: 8px;
+  }
+
+
+  /* QUICK INFO */
+
+  .corporate-info {
+    width: calc(100% - 14px);
+  }
+
+  .corporate-info-card {
+    padding: 10px 3px;
+  }
+
+  .corporate-info-card strong {
+    font-size: 14px;
+  }
+
+  .corporate-info-card span {
+    font-size: 6px;
+  }
+
+
+  /* SECTION */
+
+  .corporate-section {
+    padding: 38px 10px 18px;
+  }
+
+  .corporate-section-heading {
+    margin-bottom: 14px;
+  }
+
+  .corporate-section-heading h2 {
+    font-size: 26px;
+  }
+
+
+  /* PROJECTS - STILL HORIZONTAL */
+
+  .corporate-projects {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 5px;
+  }
+
+  .corporate-project-image {
+    height: 120px;
+  }
+
+  .corporate-project-content {
+    padding: 9px;
+  }
+
+  .corporate-project-content h3 {
+    font-size: 14px;
+  }
+
+  .corporate-project-category {
+    font-size: 7px;
+
+    padding: 3px 5px;
+  }
+
+  .corporate-project-content > p {
+    font-size: 10px;
+
+    line-height: 1.35;
+  }
+
+  .corporate-tech span {
+    padding: 3px 4px;
+
+    font-size: 7px;
+  }
+
+  .corporate-project-links {
+    gap: 5px;
+  }
+
+  .corporate-project-links a {
+    font-size: 8px;
+  }
+
+
+  /* CONTACT */
+
+  .corporate-contact-inner {
+    padding: 40px 10px;
+
+    gap: 10px;
+  }
+
+  .corporate-contact-text h2 {
+    font-size: 27px;
+  }
+
+
+  /* FOOTER */
+
+  .corporate-footer {
+    padding: 18px 10px;
+
+    font-size: 9px;
+  }
+}

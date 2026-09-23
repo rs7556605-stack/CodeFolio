@@ -1,0 +1,1150 @@
+/* ================================= */
+/* CYBERPUNK TEMPLATE */
+/* ================================= */
+
+.cyberpunk {
+  min-height: 100vh;
+  background:rgb(2, 85, 119);
+  color: #e5e7eb;
+  font-family: "Courier New", monospace;
+}
+
+
+/* ================================= */
+/* HEADER */
+/* ================================= */
+
+.cyber-header {
+  width: 100%;
+  max-width: 1150px;
+  margin: 0 auto;
+
+  padding: 25px 30px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  box-sizing: border-box;
+
+  border-bottom: 1px solid #1f2937;
+}
+
+.cyber-logo {
+  color: #22d3ee;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.cyber-username {
+  color: #a78bfa;
+  font-size: 15px;
+}
+
+
+/* ================================= */
+/* HERO */
+/* ================================= */
+
+.cyber-hero {
+  max-width: 950px;
+  margin: 0 auto;
+
+  padding: 90px 30px 80px;
+
+  text-align: center;
+  box-sizing: border-box;
+}
+
+
+/* Profile Image */
+
+.cyber-profile-image {
+  width: 140px;
+  height: 140px;
+
+  object-fit: cover;
+
+  border-radius: 50%;
+
+  border: 3px solid #22d3ee;
+
+  box-shadow:
+    0 0 15px rgba(34, 211, 238, 0.6),
+    0 0 40px rgba(34, 211, 238, 0.2);
+
+  margin-bottom: 30px;
+}
+
+
+/* Terminal */
+
+.cyber-terminal {
+  color: #22d3ee;
+
+  font-size: 18px;
+
+  margin-bottom: 15px;
+
+  letter-spacing: 2px;
+}
+
+.cyber-terminal span {
+  color: #a78bfa;
+}
+
+
+/* Hero Name */
+
+.cyber-hero h1 {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: 58px;
+
+  line-height: 1.1;
+
+  letter-spacing: 2px;
+
+  text-shadow:
+    0 0 10px rgba(34, 211, 238, 0.4);
+}
+
+.cyber-hero h1 span {
+  color: #22d3ee;
+}
+
+
+/* Bio */
+
+.cyber-hero p {
+  max-width: 700px;
+
+  margin: 25px auto;
+
+  color: #9ca3af;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 18px;
+
+  line-height: 1.7;
+}
+
+
+/* ================================= */
+/* SOCIAL LINKS */
+/* ================================= */
+
+.cyber-socials {
+  display: flex;
+
+  justify-content: center;
+
+  flex-wrap: wrap;
+
+  gap: 12px;
+
+  margin-top: 30px;
+}
+
+.cyber-socials a {
+  padding: 11px 18px;
+
+  color: #22d3ee;
+
+  border: 1px solid #22d3ee;
+
+  background: transparent;
+
+  text-decoration: none;
+
+  font-size: 14px;
+
+  transition: 0.2s;
+}
+
+.cyber-socials a:hover {
+  background: #22d3ee;
+
+  color: #080b12;
+
+  box-shadow:
+    0 0 15px rgba(34, 211, 238, 0.6);
+}
+
+
+/* ================================= */
+/* SECTIONS */
+/* ================================= */
+
+.cyber-section {
+  max-width: 1100px;
+
+  margin: 0 auto;
+
+  padding: 60px 30px;
+
+  box-sizing: border-box;
+}
+
+.cyber-section-title {
+  margin-bottom: 35px;
+
+  color: #a78bfa;
+
+  font-size: 28px;
+
+  text-align: center;
+
+  letter-spacing: 2px;
+
+  text-shadow:
+    0 0 10px rgba(167, 139, 250, 0.4);
+}
+
+
+/* ================================= */
+/* SKILLS */
+/* ================================= */
+
+.cyber-skills {
+  display: flex;
+
+  justify-content: center;
+
+  flex-wrap: wrap;
+
+  gap: 15px;
+}
+
+.cyber-skill {
+  padding: 12px 20px;
+
+  color: #22d3ee;
+
+  border: 1px solid #164e63;
+
+  background: #0b1220;
+
+  font-size: 15px;
+
+  transition: 0.2s;
+}
+
+.cyber-skill span {
+  color: #a78bfa;
+
+  margin-right: 8px;
+}
+
+.cyber-skill:hover {
+  border-color: #22d3ee;
+
+  box-shadow:
+    0 0 12px rgba(34, 211, 238, 0.3);
+}
+
+
+/* ================================= */
+/* PROJECTS */
+/* ================================= */
+
+.cyber-projects {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 25px;
+}
+
+.cyber-project {
+  overflow: hidden;
+
+  background: #20335d;
+
+  border: 1px solid #1f2937;
+
+  box-shadow:
+    0 0 15px rgba(0, 0, 0, 0.4);
+
+  transition: 0.2s;
+}
+
+.cyber-project:hover {
+  border-color: #22d3ee;
+
+  box-shadow:
+    0 0 20px rgba(34, 211, 238, 0.2);
+}
+
+
+/* Project Image */
+
+.cyber-project > img {
+  width: 100%;
+
+  height: 210px;
+
+  object-fit: cover;
+
+  display: block;
+
+  border-bottom: 1px solid #1f2937;
+}
+
+
+/* Project Content */
+
+.cyber-project-content {
+  padding: 25px;
+}
+
+.cyber-project-content h2 {
+  margin: 0 0 15px;
+
+  color: #ffffff;
+
+  font-size: 23px;
+}
+
+.cyber-project-content p {
+  margin: 0 0 20px;
+
+  color: #9ca3af;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  line-height: 1.6;
+}
+
+
+/* Tech */
+
+.cyber-tech {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 8px;
+
+  margin-bottom: 20px;
+}
+
+.cyber-tech span {
+  padding: 6px 10px;
+
+  color: rgb(243, 240, 240);
+
+  border: 1px solid #312e81;
+
+  font-size: 12px;
+}
+
+
+/* Project Links */
+
+.cyber-project-links {
+  display: flex;
+
+  gap: 18px;
+}
+
+.cyber-project-links a {
+  color: #22d3ee;
+
+  text-decoration: none;
+
+  font-size: 14px;
+
+  font-weight: 700;
+}
+
+.cyber-project-links a:hover {
+  color: #ffffff;
+
+  text-shadow:
+    0 0 8px rgba(34, 211, 238, 0.8);
+}
+
+
+/* ================================= */
+/* FOOTER */
+/* ================================= */
+
+.cyber-footer {
+  margin-top: 50px;
+
+  padding: 35px 20px;
+
+  text-align: center;
+
+  border-top: 1px solid #1f2937;
+
+  color: #6b7280;
+}
+
+
+
+.cyber-footer p {
+  margin-top: 12px;
+
+  font-family: Arial, Helvetica, sans-serif;
+color: #22d3ee;
+  font-size: 13px;
+  
+}
+
+
+/* ================================= */
+/* TABLET */
+/* 769px - 900px */
+/* ================================= */
+
+@media (min-width: 769px) and (max-width: 900px) {
+
+  /* =========================
+     HEADER
+  ========================= */
+
+  .cyber-header {
+    width: 100%;
+    max-width: 100%;
+
+    padding: 22px 25px;
+
+    box-sizing: border-box;
+  }
+
+  .cyber-logo {
+    font-size: 22px;
+
+    letter-spacing: 1.5px;
+  }
+
+  .cyber-username {
+    font-size: 14px;
+  }
+
+
+  /* =========================
+     HERO
+  ========================= */
+
+  .cyber-hero {
+    width: 100%;
+    max-width: 900px;
+
+    padding: 70px 30px 65px;
+
+    box-sizing: border-box;
+  }
+
+
+  /* PROFILE */
+
+  .cyber-profile-image {
+    width: 125px;
+    height: 125px;
+
+    margin-bottom: 25px;
+  }
+
+
+  /* TERMINAL */
+
+  .cyber-terminal {
+    font-size: 17px;
+
+    letter-spacing: 1.5px;
+
+    margin-bottom: 13px;
+  }
+
+
+  /* HERO NAME */
+
+  .cyber-hero h1 {
+    font-size: clamp(46px, 7vw, 56px);
+
+    line-height: 1.1;
+
+    letter-spacing: 1.5px;
+  }
+
+
+  /* BIO */
+
+  .cyber-hero p {
+    max-width: 650px;
+
+    margin: 22px auto;
+
+    font-size: 17px;
+
+    line-height: 1.65;
+  }
+
+
+  /* =========================
+     SOCIAL LINKS
+  ========================= */
+
+  .cyber-socials {
+    display: flex;
+
+    flex-direction: row;
+
+    justify-content: center;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    margin-top: 25px;
+  }
+
+  .cyber-socials a {
+    width: auto;
+
+    padding: 10px 15px;
+
+    font-size: 13px;
+
+    box-sizing: border-box;
+  }
+
+
+  /* =========================
+     SECTIONS
+  ========================= */
+
+  .cyber-section {
+    width: 100%;
+    max-width: 100%;
+
+    padding: 55px 25px;
+
+    box-sizing: border-box;
+  }
+
+  .cyber-section-title {
+    margin-bottom: 30px;
+
+    font-size: 27px;
+
+    line-height: 1.2;
+  }
+
+
+  /* =========================
+     SKILLS
+  ========================= */
+
+  .cyber-skills {
+    width: 100%;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+  }
+
+  .cyber-skill {
+    padding: 10px 15px;
+
+    font-size: 13px;
+
+    box-sizing: border-box;
+  }
+
+
+  /* =========================
+     PROJECTS
+     2 CARDS HORIZONTAL
+  ========================= */
+
+  .cyber-projects {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 15px;
+
+    box-sizing: border-box;
+  }
+
+  .cyber-project {
+    width: 100%;
+
+    min-width: 0;
+
+    box-sizing: border-box;
+  }
+
+
+  /* PROJECT IMAGE */
+
+  .cyber-project > img {
+    width: 100%;
+
+    height: 190px;
+
+    object-fit: cover;
+  }
+
+
+  /* PROJECT CONTENT */
+
+  .cyber-project-content {
+    padding: 18px;
+  }
+
+  .cyber-project-content h2 {
+    margin-bottom: 12px;
+
+    font-size: 20px;
+
+    line-height: 1.25;
+
+    word-break: break-word;
+  }
+
+  .cyber-project-content p {
+    margin-bottom: 15px;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+  }
+
+
+  /* =========================
+     TECH
+  ========================= */
+
+  .cyber-tech {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 6px;
+
+    margin-bottom: 15px;
+  }
+
+  .cyber-tech span {
+    padding: 5px 8px;
+
+    font-size: 10px;
+  }
+
+
+  /* =========================
+     PROJECT LINKS
+  ========================= */
+
+  .cyber-project-links {
+    display: flex;
+
+    flex-direction: row;
+
+    flex-wrap: wrap;
+
+    gap: 12px;
+  }
+
+  .cyber-project-links a {
+    font-size: 12px;
+  }
+
+
+  /* =========================
+     FOOTER
+  ========================= */
+
+  .cyber-footer {
+    width: 100%;
+
+    margin-top: 40px;
+
+    padding: 30px 20px;
+
+    box-sizing: border-box;
+  }
+
+  .cyber-footer p {
+    font-size: 12px;
+
+    line-height: 1.5;
+  }
+}
+
+/* ================================= */
+/* RESPONSIVE - MOBILE */
+/* SAME DESIGN + PROPER MOBILE FIT */
+/* ================================= */
+
+@media (max-width: 768px) {
+
+  /* =================================
+     HEADER
+  ================================= */
+
+  .cyber-header {
+    width: 100%;
+    max-width: 100%;
+
+    padding: 20px 18px;
+
+    display: flex;
+    flex-direction: row;
+
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 15px;
+
+    box-sizing: border-box;
+  }
+
+  .cyber-logo {
+    font-size: 21px;
+    letter-spacing: 1.5px;
+  }
+
+  .cyber-username {
+    font-size: 13px;
+    text-align: right;
+  }
+
+
+  /* =================================
+     HERO
+  ================================= */
+
+  .cyber-hero {
+    width: 100%;
+    max-width: 100%;
+
+    padding: 65px 20px 55px;
+
+    box-sizing: border-box;
+  }
+
+
+  /* PROFILE IMAGE */
+
+  .cyber-profile-image {
+    width: 120px;
+    height: 120px;
+
+    margin-bottom: 25px;
+  }
+
+
+  /* TERMINAL */
+
+  .cyber-terminal {
+    font-size: 16px;
+
+    letter-spacing: 1.5px;
+
+    margin-bottom: 14px;
+  }
+
+
+  /* HERO NAME */
+
+  .cyber-hero h1 {
+    font-size: clamp(36px, 9vw, 58px);
+
+    line-height: 1.1;
+
+    letter-spacing: 1px;
+
+    word-break: break-word;
+  }
+
+
+  /* BIO */
+
+  .cyber-hero p {
+    width: 100%;
+    max-width: 650px;
+
+    margin: 22px auto;
+
+    font-size: 16px;
+
+    line-height: 1.65;
+  }
+
+
+  /* =================================
+     SOCIAL LINKS
+  ================================= */
+
+  .cyber-socials {
+    width: 100%;
+
+    display: flex;
+
+    flex-direction: row;
+
+    justify-content: center;
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 9px;
+
+    margin-top: 25px;
+  }
+
+  .cyber-socials a {
+    width: auto;
+
+    max-width: 100%;
+
+    padding: 10px 15px;
+
+    font-size: 13px;
+
+    box-sizing: border-box;
+  }
+
+
+  /* =================================
+     SECTIONS
+  ================================= */
+
+  .cyber-section {
+    width: 100%;
+    max-width: 100%;
+
+    padding: 50px 20px;
+
+    box-sizing: border-box;
+  }
+
+
+  .cyber-section-title {
+    margin-bottom: 30px;
+
+    font-size: 26px;
+
+    line-height: 1.25;
+  }
+
+
+  /* =================================
+     SKILLS
+  ================================= */
+
+  .cyber-skills {
+    width: 100%;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+  }
+
+  .cyber-skill {
+    padding: 10px 16px;
+
+    font-size: 14px;
+
+    box-sizing: border-box;
+  }
+
+
+  /* =================================
+     PROJECTS
+  ================================= */
+
+  .cyber-projects {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    gap: 20px;
+  }
+
+  .cyber-project {
+    width: 100%;
+    min-width: 0;
+
+    box-sizing: border-box;
+  }
+
+
+  /* PROJECT IMAGE */
+
+  .cyber-project > img {
+    width: 100%;
+
+    height: 200px;
+
+    object-fit: cover;
+  }
+
+
+  /* PROJECT CONTENT */
+
+  .cyber-project-content {
+    padding: 20px;
+  }
+
+  .cyber-project-content h2 {
+    font-size: 21px;
+
+    line-height: 1.3;
+  }
+
+  .cyber-project-content p {
+    font-size: 15px;
+
+    line-height: 1.6;
+  }
+
+
+  /* =================================
+     TECH
+  ================================= */
+
+  .cyber-tech {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 7px;
+  }
+
+  .cyber-tech span {
+    padding: 6px 9px;
+
+    font-size: 11px;
+  }
+
+
+  /* =================================
+     PROJECT LINKS
+  ================================= */
+
+  .cyber-project-links {
+    display: flex;
+
+    flex-direction: row;
+
+    flex-wrap: wrap;
+
+    gap: 14px;
+  }
+
+
+  /* =================================
+     FOOTER
+  ================================= */
+
+  .cyber-footer {
+    width: 100%;
+
+    margin-top: 35px;
+
+    padding: 28px 18px;
+
+    box-sizing: border-box;
+  }
+
+  .cyber-footer p {
+    font-size: 12px;
+
+    line-height: 1.5;
+  }
+}
+
+
+/* ================================= */
+/* SMALL MOBILE */
+/* ================================= */
+
+@media (max-width: 480px) {
+
+  /* HEADER */
+
+  .cyber-header {
+    padding: 17px 14px;
+
+    flex-direction: row;
+
+    gap: 10px;
+  }
+
+  .cyber-logo {
+    font-size: 18px;
+
+    letter-spacing: 1px;
+  }
+
+  .cyber-username {
+    font-size: 12px;
+  }
+
+
+  /* HERO */
+
+  .cyber-hero {
+    padding: 50px 15px 45px;
+  }
+
+
+  /* PROFILE */
+
+  .cyber-profile-image {
+    width: 105px;
+    height: 105px;
+
+    margin-bottom: 22px;
+  }
+
+
+  /* TERMINAL */
+
+  .cyber-terminal {
+    font-size: 14px;
+
+    letter-spacing: 1px;
+  }
+
+
+  /* NAME */
+
+  .cyber-hero h1 {
+    font-size: 34px;
+
+    line-height: 1.15;
+
+    letter-spacing: 0.5px;
+  }
+
+
+  /* BIO */
+
+  .cyber-hero p {
+    font-size: 15px;
+
+    line-height: 1.6;
+
+    margin: 18px auto;
+  }
+
+
+  /* SOCIAL */
+
+  .cyber-socials {
+    display: flex;
+
+    flex-direction: row;
+
+    flex-wrap: wrap;
+
+    justify-content: center;
+
+    gap: 7px;
+
+    margin-top: 22px;
+  }
+
+  .cyber-socials a {
+    width: auto;
+
+    padding: 9px 12px;
+
+    font-size: 12px;
+  }
+
+
+  /* SECTION */
+
+  .cyber-section {
+    padding: 42px 15px;
+  }
+
+  .cyber-section-title {
+    font-size: 23px;
+
+    margin-bottom: 25px;
+  }
+
+
+  /* SKILLS */
+
+  .cyber-skills {
+    gap: 7px;
+  }
+
+  .cyber-skill {
+    padding: 8px 12px;
+
+    font-size: 12px;
+  }
+
+
+  /* PROJECT */
+
+  .cyber-projects {
+    grid-template-columns: 1fr;
+
+    gap: 18px;
+  }
+
+  .cyber-project > img {
+    height: 180px;
+  }
+
+  .cyber-project-content {
+    padding: 18px;
+  }
+
+  .cyber-project-content h2 {
+    font-size: 19px;
+  }
+
+  .cyber-project-content p {
+    font-size: 14px;
+  }
+
+
+  /* PROJECT LINKS */
+
+  .cyber-project-links {
+    gap: 12px;
+  }
+
+
+  /* FOOTER */
+
+  .cyber-footer {
+    padding: 22px 15px;
+  }
+}

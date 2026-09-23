@@ -1,0 +1,372 @@
+/* =========================================================
+   PUBLIC RESUME PAGE
+========================================================= */
+
+.public-resume-page {
+  min-height: 100vh;
+
+  padding: 35px 20px 60px;
+
+  background: #e5e7eb;
+
+  color: #111827;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   ACTION BUTTONS
+========================================================= */
+
+.public-resume-actions {
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  gap: 16px;
+
+  margin-bottom: 30px;
+}
+
+
+.public-resume-actions button {
+  border: none;
+
+  padding: 15px 28px;
+
+  border-radius: 10px;
+
+  font-size: 17px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+
+.public-resume-actions button:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 8px 20px
+    rgba(0, 0, 0, 0.15);
+}
+
+
+/* Download */
+
+.public-download-btn {
+  background: #2563eb;
+
+  color: white;
+}
+
+
+/* Print */
+
+.public-print-btn {
+  background: #111827;
+
+  color: white;
+}
+
+
+/* =========================================================
+   IMPORTANT
+   ResumePreview already contains the actual template
+========================================================= */
+
+.public-resume-preview {
+  width: 100%;
+
+  max-width: 1200px;
+
+  margin: 0 auto;
+}
+
+
+/*
+   Do NOT redesign the resume here.
+
+   ResumePreview.jsx + its template CSS
+   should control the resume appearance.
+*/
+
+
+/* =========================================================
+   BOTTOM FOOTER
+========================================================= */
+
+.public-resume-bottom {
+  max-width: 850px;
+
+  margin: 30px auto 0;
+
+  padding: 18px 20px;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  border-top: 1px solid #cbd5e1;
+
+  color: #64748b;
+
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.public-resume-loading {
+  min-height: 100vh;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  background: #e5e7eb;
+}
+
+
+.public-loading-card {
+  width: min(90%, 450px);
+
+  padding: 40px;
+
+  background: white;
+
+  border-radius: 16px;
+
+  text-align: center;
+
+  box-shadow:
+    0 15px 40px
+    rgba(15, 23, 42, 0.12);
+}
+
+
+.public-loading-card h2 {
+  margin: 15px 0 8px;
+
+  color: #111827;
+}
+
+
+.public-loading-card p {
+  margin: 0;
+
+  color: #64748b;
+}
+
+
+/* Loading spinner */
+
+.public-loading-spinner {
+  width: 45px;
+
+  height: 45px;
+
+  margin: 0 auto;
+
+  border: 4px solid #e5e7eb;
+
+  border-top-color: #2563eb;
+
+  border-radius: 50%;
+
+  animation:
+    publicResumeSpin 0.8s linear infinite;
+}
+
+
+@keyframes publicResumeSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.public-resume-error {
+  min-height: 100vh;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  padding: 30px;
+
+  background: #e5e7eb;
+}
+
+
+.public-error-card {
+  width: min(90%, 500px);
+
+  padding: 45px 35px;
+
+  background: white;
+
+  border-radius: 16px;
+
+  text-align: center;
+
+  box-shadow:
+    0 15px 40px
+    rgba(15, 23, 42, 0.12);
+}
+
+
+.public-error-icon {
+  font-size: 50px;
+
+  margin-bottom: 10px;
+}
+
+
+.public-error-card h1 {
+  margin-bottom: 10px;
+
+  color: #111827;
+}
+
+
+.public-error-card p {
+  color: #64748b;
+
+  line-height: 1.6;
+}
+
+
+.public-error-username {
+  margin-top: 20px;
+}
+
+
+.public-error-card a {
+  display: inline-block;
+
+  margin-top: 15px;
+
+  padding: 12px 20px;
+
+  border-radius: 8px;
+
+  background: #2563eb;
+
+  color: white;
+
+  text-decoration: none;
+
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+
+  .public-resume-page {
+    padding: 20px 10px 40px;
+  }
+
+  .public-resume-actions {
+    flex-direction: column;
+
+    gap: 10px;
+
+    margin-bottom: 20px;
+  }
+
+  .public-resume-actions button {
+    width: 100%;
+
+    max-width: 350px;
+  }
+
+  .public-resume-bottom {
+    margin-top: 20px;
+
+    font-size: 12px;
+  }
+}
+
+
+/* =========================================================
+   PRINT
+========================================================= */
+
+@media print {
+
+  @page {
+    size: A4;
+
+    margin: 0;
+  }
+
+
+  html,
+  body {
+    margin: 0 !important;
+
+    padding: 0 !important;
+
+    background: white !important;
+  }
+
+
+  .public-resume-page {
+    padding: 0 !important;
+
+    margin: 0 !important;
+
+    background: white !important;
+  }
+
+
+  .no-print {
+    display: none !important;
+  }
+
+
+  .public-resume-preview {
+    width: 100% !important;
+
+    max-width: none !important;
+
+    margin: 0 !important;
+  }
+
+
+  /*
+     Let ResumePreview's own template
+     control the printed layout.
+  */
+
+  * {
+    -webkit-print-color-adjust: exact !important;
+
+    print-color-adjust: exact !important;
+  }
+}
