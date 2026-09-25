@@ -10,12 +10,27 @@ const ContactForm = ({ username }) => {
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState("");
 
+  // ==========================================
+  // API URL
+  // ==========================================
+
+  const API_URL =
+    import.meta.env.VITE_API_URL || "http://localhost:5000";
+
+  // ==========================================
+  // HANDLE INPUT CHANGE
+  // ==========================================
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
   };
+
+  // ==========================================
+  // HANDLE SUBMIT
+  // ==========================================
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,12 +40,14 @@ const ContactForm = ({ username }) => {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/contact",
+        `${API_URL}/api/contact`,
         {
           method: "POST",
+
           headers: {
             "Content-Type": "application/json",
           },
+
           body: JSON.stringify({
             ...formData,
             username,
@@ -46,7 +63,9 @@ const ContactForm = ({ username }) => {
         );
       }
 
-      setStatus("Message sent successfully ✅");
+      setStatus(
+        "Message sent successfully ✅"
+      );
 
       setFormData({
         name: "",
@@ -54,18 +73,29 @@ const ContactForm = ({ username }) => {
         message: "",
       });
     } catch (error) {
-      console.error("Contact Form Error:", error);
+      console.error(
+        "Contact Form Error:",
+        error
+      );
 
       setStatus(
-        error.message || "Something went wrong ❌"
+        error.message ||
+          "Something went wrong ❌"
       );
     } finally {
       setLoading(false);
     }
   };
 
+  // ==========================================
+  // UI
+  // ==========================================
+
   return (
-    <section className="contact-section" id="contact">
+    <section
+      className="contact-section"
+      id="contact"
+    >
       <h2>Contact Me</h2>
 
       <form
@@ -103,7 +133,9 @@ const ContactForm = ({ username }) => {
           type="submit"
           disabled={loading}
         >
-          {loading ? "Sending..." : "Send Message"}
+          {loading
+            ? "Sending..."
+            : "Send Message"}
         </button>
 
         {status && (
