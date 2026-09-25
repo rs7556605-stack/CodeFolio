@@ -1,11 +1,11 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 
 import Login from "./pages/Login";
-import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import TemplateTest from "./pages/TemplateTest";
 import PublicPortfolio from "./pages/PublicPortfolio";
+import Register from "./pages/Register";
 import ResumeBuilder from "./pages/ResumeBuilder";
 import PublicResume from "./pages/PublicResume";
 
@@ -15,48 +15,45 @@ function App() {
   return (
     <HelmetProvider>
       <BrowserRouter>
-
         <Routes>
 
+          {/* Home */}
           <Route
-            path="/register"
-            element={<Register />}
+            path="/"
+            element={<Navigate to="/login" replace />}
           />
 
-          <Route
-            path="/login"
-            element={<Login />}
-          />
+          {/* Authentication */}
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
 
-          <Route
-            path="/dashboard"
-            element={<Dashboard />}
-          />
+          {/* Dashboard */}
+          <Route path="/dashboard" element={<Dashboard />} />
 
+          {/* Templates */}
           <Route
             path="/template-test"
             element={<TemplateTest />}
           />
 
+          {/* Resume */}
           <Route
             path="/resume-builder"
             element={<ResumeBuilder />}
           />
 
-          {/* PUBLIC RESUME */}
           <Route
             path="/resume/:username"
             element={<PublicResume />}
           />
 
-          {/* PUBLIC PORTFOLIO */}
+          {/* Public Portfolio */}
           <Route
             path="/:username"
             element={<PublicPortfolio />}
           />
 
         </Routes>
-
       </BrowserRouter>
     </HelmetProvider>
   );
