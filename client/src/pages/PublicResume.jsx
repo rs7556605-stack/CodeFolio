@@ -2,10 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import ResumePreview from "../components/ResumePreview";
+import API_URL from "../services/api";
 
 import "./PublicResume.css";
-
-const API_URL = "http://localhost:5000";
 
 const PublicResume = () => {
   const { username } = useParams();
@@ -26,46 +25,82 @@ const PublicResume = () => {
         setLoading(true);
         setError("");
 
+        // =====================================================
+        // CHECK USERNAME
+        // =====================================================
+
         if (!username) {
-          throw new Error("Username is missing.");
+          throw new Error(
+            "Username is missing."
+          );
         }
 
-        const cleanUsername = username
-          .trim()
-          .toLowerCase();
+        // =====================================================
+        // CLEAN USERNAME
+        // =====================================================
+
+        const cleanUsername =
+          username.trim().toLowerCase();
+
+        // =====================================================
+        // PUBLIC RESUME API
+        // =====================================================
 
         const response = await fetch(
           `${API_URL}/api/resume/public/${encodeURIComponent(
             cleanUsername
-          )}`
+          )}`,
+          {
+            method: "GET",
+          }
         );
 
-        const data = await response.json();
+        // =====================================================
+        // RESPONSE
+        // =====================================================
+
+        const data =
+          await response.json();
+
+        console.log(
+          "Public Resume API Response:",
+          data
+        );
+
+        // =====================================================
+        // API ERROR
+        // =====================================================
 
         if (!response.ok) {
           throw new Error(
-            data.message || "Resume not found"
+            data.message ||
+              "Resume not found"
           );
         }
 
-        // ==========================================
+        // =====================================================
         // SAVE RESUME DATA
-        // ==========================================
+        // =====================================================
 
-        setResume(data.resume || null);
+        setResume(
+          data.resume || null
+        );
 
-        // ==========================================
+        // =====================================================
         // SAVE OWNER DATA
-        // ==========================================
+        // =====================================================
 
-        setOwner(data.user || null);
+        setOwner(
+          data.user || null
+        );
 
-        // ==========================================
+        // =====================================================
         // BROWSER TITLE
-        // ==========================================
+        // =====================================================
 
         const fullName =
-          data.resume?.personalInfo?.fullName ||
+          data.resume?.personalInfo
+            ?.fullName ||
           data.user?.name ||
           cleanUsername;
 
@@ -89,7 +124,6 @@ const PublicResume = () => {
     };
 
     fetchPublicResume();
-
   }, [username]);
 
   // =========================================================
@@ -99,6 +133,7 @@ const PublicResume = () => {
   if (loading) {
     return (
       <div className="public-resume-loading">
+
         <div className="public-loading-card">
 
           <div className="public-loading-spinner"></div>
@@ -108,10 +143,12 @@ const PublicResume = () => {
           </h2>
 
           <p>
-            Please wait while we load the public resume.
+            Please wait while we load
+            the public resume.
           </p>
 
         </div>
+
       </div>
     );
   }
@@ -140,10 +177,13 @@ const PublicResume = () => {
           </p>
 
           <p className="public-error-username">
+
             Username:{" "}
+
             <strong>
               {username || "Unknown"}
             </strong>
+
           </p>
 
           <a href="/">
@@ -169,10 +209,14 @@ const PublicResume = () => {
 
       <div className="public-resume-actions no-print">
 
+        {/* DOWNLOAD / PRINT */}
+
         <button
           type="button"
           className="public-download-btn"
-          onClick={() => window.print()}
+          onClick={() =>
+            window.print()
+          }
         >
           📥 Download PDF
         </button>
@@ -180,7 +224,9 @@ const PublicResume = () => {
         <button
           type="button"
           className="public-print-btn"
-          onClick={() => window.print()}
+          onClick={() =>
+            window.print()
+          }
         >
           🖨️ Print Resume
         </button>
@@ -188,11 +234,10 @@ const PublicResume = () => {
       </div>
 
       {/* ===================================================
-          RESUME
-          
-          IMPORTANT:
-          Same ResumePreview component used by
-          ResumeBuilder Live Preview.
+          RESUME PREVIEW
+
+          Same ResumePreview component is used
+          by ResumeBuilder Live Preview.
       =================================================== */}
 
       <div className="public-resume-preview">
@@ -210,7 +255,8 @@ const PublicResume = () => {
       <div className="public-resume-bottom no-print">
 
         <span>
-          {owner?.username || username}
+          {owner?.username ||
+            username}
         </span>
 
         <span>

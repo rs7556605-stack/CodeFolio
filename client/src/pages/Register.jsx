@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import API_URL from "../services/api";
 
 const Register = () => {
   // ==========================================
@@ -12,6 +13,10 @@ const Register = () => {
     email: "",
     password: "",
   });
+
+  // ==========================================
+  // UI STATES
+  // ==========================================
 
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
@@ -65,16 +70,34 @@ const Register = () => {
       }
 
       // ========================================
+      // USERNAME VALIDATION
+      // ========================================
+
+      const usernameRegex =
+        /^[a-zA-Z0-9_-]+$/;
+
+      if (
+        !usernameRegex.test(
+          formData.username.trim()
+        )
+      ) {
+        throw new Error(
+          "Username can contain only letters, numbers, underscore and hyphen."
+        );
+      }
+
+      // ========================================
       // REGISTER API
       // ========================================
 
       const response = await fetch(
-        "http://localhost:5000/api/auth/register",
+        `${API_URL}/api/auth/register`,
         {
           method: "POST",
 
           headers: {
-            "Content-Type": "application/json",
+            "Content-Type":
+              "application/json",
           },
 
           body: JSON.stringify({
@@ -93,8 +116,17 @@ const Register = () => {
         }
       );
 
+      // ========================================
+      // RESPONSE
+      // ========================================
+
       const data =
         await response.json();
+
+      console.log(
+        "Register API Response:",
+        data
+      );
 
       // ========================================
       // API ERROR
@@ -114,6 +146,12 @@ const Register = () => {
       setMessage(
         "Registration successful! Redirecting to login..."
       );
+
+      setError("");
+
+      // ========================================
+      // RESET FORM
+      // ========================================
 
       setFormData({
         username: "",
@@ -140,6 +178,9 @@ const Register = () => {
         error.message ||
           "Something went wrong."
       );
+
+      setMessage("");
+
     } finally {
       setLoading(false);
     }
@@ -170,7 +211,6 @@ const Register = () => {
 
         </div>
 
-
         {/* ====================================
             REGISTER FORM
         ==================================== */}
@@ -180,7 +220,9 @@ const Register = () => {
           onSubmit={handleSubmit}
         >
 
-          {/* USERNAME */}
+          {/* ==================================
+              USERNAME
+          ================================== */}
 
           <div className="form-group">
 
@@ -206,8 +248,9 @@ const Register = () => {
 
           </div>
 
-
-          {/* NAME */}
+          {/* ==================================
+              NAME
+          ================================== */}
 
           <div className="form-group">
 
@@ -227,8 +270,9 @@ const Register = () => {
 
           </div>
 
-
-          {/* EMAIL */}
+          {/* ==================================
+              EMAIL
+          ================================== */}
 
           <div className="form-group">
 
@@ -249,8 +293,9 @@ const Register = () => {
 
           </div>
 
-
-          {/* PASSWORD */}
+          {/* ==================================
+              PASSWORD
+          ================================== */}
 
           <div className="form-group">
 
@@ -266,7 +311,7 @@ const Register = () => {
               onChange={handleChange}
               placeholder="Enter password"
               autoComplete="new-password"
-              minLength="6"
+              minLength={6}
               required
             />
 
@@ -276,8 +321,9 @@ const Register = () => {
 
           </div>
 
-
-          {/* ERROR */}
+          {/* ==================================
+              ERROR
+          ================================== */}
 
           {error && (
             <p className="auth-error">
@@ -285,8 +331,9 @@ const Register = () => {
             </p>
           )}
 
-
-          {/* SUCCESS */}
+          {/* ==================================
+              SUCCESS
+          ================================== */}
 
           {message && (
             <p className="auth-success">
@@ -294,8 +341,9 @@ const Register = () => {
             </p>
           )}
 
-
-          {/* SUBMIT */}
+          {/* ==================================
+              SUBMIT
+          ================================== */}
 
           <button
             type="submit"
@@ -308,7 +356,6 @@ const Register = () => {
           </button>
 
         </form>
-
 
         {/* ====================================
             LOGIN LINK

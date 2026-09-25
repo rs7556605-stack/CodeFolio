@@ -4,6 +4,8 @@ import React, {
   useState,
 } from "react";
 
+import API_URL from "../services/api";
+
 // ==========================================
 // EMPTY FORM
 // ==========================================
@@ -88,9 +90,7 @@ const ProjectForm = ({
             : "",
 
         techStack:
-          editProject.techStack?.join(
-            ", "
-          ) || "",
+          editProject.techStack?.join(", ") || "",
 
         repoLink:
           editProject.repoLink || "",
@@ -104,7 +104,11 @@ const ProjectForm = ({
 
       setMessage("");
     } else {
-      setFormData(emptyForm);
+      setFormData({
+        ...emptyForm,
+      });
+
+      setMessage("");
     }
   }, [editProject]);
 
@@ -153,8 +157,7 @@ const ProjectForm = ({
             // Resize width
             if (width > maxWidth) {
               height =
-                (height *
-                  maxWidth) /
+                (height * maxWidth) /
                 width;
 
               width =
@@ -167,8 +170,7 @@ const ProjectForm = ({
               maxHeight
             ) {
               width =
-                (width *
-                  maxHeight) /
+                (width * maxHeight) /
                 height;
 
               height =
@@ -471,7 +473,7 @@ const ProjectForm = ({
       if (editProject) {
         const response =
           await fetch(
-            `http://localhost:5000/api/projects/${editProject._id}`,
+            `${API_URL}/api/projects/${editProject._id}`,
             {
               method: "PUT",
 
@@ -520,7 +522,7 @@ const ProjectForm = ({
 
       const response =
         await fetch(
-          "http://localhost:5000/api/projects",
+          `${API_URL}/api/projects`,
           {
             method: "POST",
 

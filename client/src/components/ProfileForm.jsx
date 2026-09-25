@@ -1,6 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
+import API_URL from "../services/api";
 
 const ProfileForm = ({ onProfileUpdated }) => {
+  // ==========================================
+  // FORM DATA
+  // ==========================================
+
   const [formData, setFormData] = useState({
     name: "",
     profession: "",
@@ -23,14 +28,21 @@ const ProfileForm = ({ onProfileUpdated }) => {
   // ==========================================
   // GET PROFILE
   // ==========================================
+
   useEffect(() => {
     const fetchProfile = async () => {
       try {
         const token = localStorage.getItem("token");
 
+        if (!token) {
+          setMessage("Session expired. Please login again.");
+          return;
+        }
+
         const response = await fetch(
-          "http://localhost:5000/api/profile",
+          `${API_URL}/api/profile`,
           {
+            method: "GET",
             headers: {
               Authorization: `Bearer ${token}`,
             },
@@ -60,7 +72,9 @@ const ProfileForm = ({ onProfileUpdated }) => {
         });
       } catch (error) {
         console.error("Profile Load Error:", error);
-        setMessage(error.message);
+        setMessage(
+          error.message || "Failed to load profile"
+        );
       } finally {
         setLoading(false);
       }
@@ -72,6 +86,7 @@ const ProfileForm = ({ onProfileUpdated }) => {
   // ==========================================
   // HANDLE INPUT
   // ==========================================
+
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -84,6 +99,7 @@ const ProfileForm = ({ onProfileUpdated }) => {
   // ==========================================
   // PROFILE IMAGE CLICK
   // ==========================================
+
   const handleImageClick = () => {
     if (formData.profileImage) {
       setShowImageMenu(true);
@@ -95,6 +111,7 @@ const ProfileForm = ({ onProfileUpdated }) => {
   // ==========================================
   // SELECT IMAGE
   // ==========================================
+
   const handleImageChange = (e) => {
     const file = e.target.files?.[0];
 
@@ -130,6 +147,7 @@ const ProfileForm = ({ onProfileUpdated }) => {
   // ==========================================
   // CHANGE PHOTO
   // ==========================================
+
   const handleChangePhoto = () => {
     setShowImageMenu(false);
     fileInputRef.current?.click();
@@ -138,6 +156,7 @@ const ProfileForm = ({ onProfileUpdated }) => {
   // ==========================================
   // REMOVE PHOTO
   // ==========================================
+
   const handleRemovePhoto = () => {
     setFormData((prev) => ({
       ...prev,
@@ -151,6 +170,7 @@ const ProfileForm = ({ onProfileUpdated }) => {
   // ==========================================
   // UPDATE PROFILE
   // ==========================================
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -160,8 +180,14 @@ const ProfileForm = ({ onProfileUpdated }) => {
     try {
       const token = localStorage.getItem("token");
 
+      if (!token) {
+        throw new Error(
+          "Session expired. Please login again."
+        );
+      }
+
       const response = await fetch(
-        "http://localhost:5000/api/profile",
+        `${API_URL}/api/profile`,
         {
           method: "PUT",
 
@@ -198,6 +224,7 @@ const ProfileForm = ({ onProfileUpdated }) => {
       // ==========================================
       // DATABASE UPDATE KE BAAD LIVE PREVIEW REFRESH
       // ==========================================
+
       if (onProfileUpdated) {
         await onProfileUpdated();
       }
@@ -211,7 +238,9 @@ const ProfileForm = ({ onProfileUpdated }) => {
         error
       );
 
-      setMessage(error.message);
+      setMessage(
+        error.message || "Profile update failed"
+      );
     } finally {
       setSaving(false);
     }
@@ -220,6 +249,7 @@ const ProfileForm = ({ onProfileUpdated }) => {
   // ==========================================
   // LOADING
   // ==========================================
+
   if (loading) {
     return <p>Loading profile...</p>;
   }
@@ -227,9 +257,9 @@ const ProfileForm = ({ onProfileUpdated }) => {
   // ==========================================
   // UI
   // ==========================================
+
   return (
     <div className="profile-form">
-
       <h2>Profile Information</h2>
 
       <form onSubmit={handleSubmit}>
@@ -239,7 +269,6 @@ const ProfileForm = ({ onProfileUpdated }) => {
         ====================================== */}
 
         <div className="profile-image-section">
-
           <label>Profile Image</label>
 
           <div className="profile-image-container">
@@ -309,7 +338,6 @@ const ProfileForm = ({ onProfileUpdated }) => {
           <p className="profile-image-hint">
             Click profile image to change photo
           </p>
-
         </div>
 
         {/* ======================================
@@ -317,7 +345,6 @@ const ProfileForm = ({ onProfileUpdated }) => {
         ====================================== */}
 
         <div className="form-group">
-
           <label>Name</label>
 
           <input
@@ -327,7 +354,6 @@ const ProfileForm = ({ onProfileUpdated }) => {
             onChange={handleChange}
             placeholder="Enter your name"
           />
-
         </div>
 
         {/* ======================================
@@ -335,7 +361,6 @@ const ProfileForm = ({ onProfileUpdated }) => {
         ====================================== */}
 
         <div className="form-group">
-
           <label>Profession</label>
 
           <input
@@ -345,7 +370,6 @@ const ProfileForm = ({ onProfileUpdated }) => {
             onChange={handleChange}
             placeholder="e.g. Full Stack Developer"
           />
-
         </div>
 
         {/* ======================================
@@ -353,7 +377,6 @@ const ProfileForm = ({ onProfileUpdated }) => {
         ====================================== */}
 
         <div className="form-group">
-
           <label>Bio</label>
 
           <textarea
@@ -363,7 +386,6 @@ const ProfileForm = ({ onProfileUpdated }) => {
             placeholder="Write something about yourself"
             rows="4"
           />
-
         </div>
 
         {/* ======================================
@@ -371,7 +393,6 @@ const ProfileForm = ({ onProfileUpdated }) => {
         ====================================== */}
 
         <div className="form-group">
-
           <label>Resume URL</label>
 
           <div className="resume-url-row">
@@ -387,7 +408,8 @@ const ProfileForm = ({ onProfileUpdated }) => {
               type="button"
               className="create-resume-btn"
               onClick={() => {
-                window.location.href = "/resume-builder";
+                window.location.href =
+                  "/resume-builder";
               }}
             >
               📄 Create Resume
@@ -395,9 +417,9 @@ const ProfileForm = ({ onProfileUpdated }) => {
           </div>
 
           <small className="resume-url-help">
-            Don't have a resume? Create one using CodeFolio Resume Builder.
+            Don't have a resume? Create one using
+            CodeFolio Resume Builder.
           </small>
-
         </div>
 
         {/* ======================================
@@ -409,7 +431,6 @@ const ProfileForm = ({ onProfileUpdated }) => {
         {/* GitHub */}
 
         <div className="form-group">
-
           <label>GitHub</label>
 
           <input
@@ -419,13 +440,11 @@ const ProfileForm = ({ onProfileUpdated }) => {
             onChange={handleChange}
             placeholder="https://github.com/username"
           />
-
         </div>
 
         {/* LinkedIn */}
 
         <div className="form-group">
-
           <label>LinkedIn</label>
 
           <input
@@ -435,13 +454,11 @@ const ProfileForm = ({ onProfileUpdated }) => {
             onChange={handleChange}
             placeholder="https://linkedin.com/in/username"
           />
-
         </div>
 
         {/* Twitter */}
 
         <div className="form-group">
-
           <label>Twitter</label>
 
           <input
@@ -451,13 +468,11 @@ const ProfileForm = ({ onProfileUpdated }) => {
             onChange={handleChange}
             placeholder="https://twitter.com/username"
           />
-
         </div>
 
         {/* Website */}
 
         <div className="form-group">
-
           <label>Website</label>
 
           <input
@@ -467,7 +482,6 @@ const ProfileForm = ({ onProfileUpdated }) => {
             onChange={handleChange}
             placeholder="https://yourwebsite.com"
           />
-
         </div>
 
         {/* ======================================
@@ -479,9 +493,7 @@ const ProfileForm = ({ onProfileUpdated }) => {
           className="primary-btn"
           disabled={saving}
         >
-          {saving
-            ? "Saving..."
-            : "Save Profile"}
+          {saving ? "Saving..." : "Save Profile"}
         </button>
 
       </form>
@@ -495,7 +507,6 @@ const ProfileForm = ({ onProfileUpdated }) => {
           {message}
         </p>
       )}
-
     </div>
   );
 };

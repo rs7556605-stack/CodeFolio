@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import API_URL from "../services/api";
 
 const ProjectList = ({
   onEdit,
@@ -24,7 +25,7 @@ const ProjectList = ({
       }
 
       const response = await fetch(
-        "http://localhost:5000/api/projects",
+        `${API_URL}/api/projects`,
         {
           method: "GET",
           headers: {
@@ -62,7 +63,7 @@ const ProjectList = ({
   };
 
   // ==========================================
-  // INITIAL LOAD + REFRESH AFTER ADD/UPDATE
+  // INITIAL LOAD + REFRESH AFTER ADD / UPDATE
   // ==========================================
   useEffect(() => {
     fetchProjects();
@@ -90,7 +91,7 @@ const ProjectList = ({
       }
 
       const response = await fetch(
-        `http://localhost:5000/api/projects/${id}`,
+        `${API_URL}/api/projects/${id}`,
         {
           method: "DELETE",
           headers: {
@@ -101,7 +102,10 @@ const ProjectList = ({
 
       const data = await response.json();
 
-      console.log("Delete Project Response:", data);
+      console.log(
+        "Delete Project Response:",
+        data
+      );
 
       if (!response.ok) {
         throw new Error(
@@ -160,17 +164,23 @@ const ProjectList = ({
   return (
     <div className="project-list">
 
-      {/* TITLE */}
+      {/* ========================================
+          TITLE
+      ======================================== */}
       <h2>Your Projects</h2>
 
-      {/* MESSAGE */}
+      {/* ========================================
+          MESSAGE
+      ======================================== */}
       {message && (
         <p className="profile-message">
           {message}
         </p>
       )}
 
-      {/* NO PROJECT */}
+      {/* ========================================
+          NO PROJECT
+      ======================================== */}
       {projects.length === 0 ? (
         <p>No projects found.</p>
       ) : (
@@ -232,7 +242,9 @@ const ProjectList = ({
                 project.liveLink) && (
                 <div className="project-links">
 
-                  {/* GitHub */}
+                  {/* ==================================
+                      GITHUB
+                  ================================== */}
                   {project.repoLink && (
                     <a
                       href={project.repoLink}
@@ -243,7 +255,9 @@ const ProjectList = ({
                     </a>
                   )}
 
-                  {/* Live Demo */}
+                  {/* ==================================
+                      LIVE DEMO
+                  ================================== */}
                   {project.liveLink && (
                     <a
                       href={project.liveLink}
@@ -262,7 +276,9 @@ const ProjectList = ({
               ================================== */}
               <div className="project-actions">
 
-                {/* EDIT */}
+                {/* ==================================
+                    EDIT
+                ================================== */}
                 <button
                   type="button"
                   className="edit-btn"
@@ -280,7 +296,9 @@ const ProjectList = ({
                   Edit
                 </button>
 
-                {/* DELETE */}
+                {/* ==================================
+                    DELETE
+                ================================== */}
                 <button
                   type="button"
                   className="delete-btn"

@@ -4,7 +4,7 @@ import "./ResumeBuilder.css";
 
 import ResumePreview from "../components/ResumePreview";
 
-const API_URL = "http://localhost:5000";
+import API_URL from "../services/api";
 
 /* =========================================================
    EMPTY OBJECTS
@@ -34,7 +34,7 @@ const emptySkill = {
   expertise: "Programming Languages",
   customExpertise: "",
   level: "Beginner",
-}
+};
 
 const technicalSkillOptions = {
   "Information Technology (IT)": {

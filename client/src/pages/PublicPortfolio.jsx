@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import templateMap from "../templates/templateMap";
 import { Helmet } from "react-helmet-async";
+
+import templateMap from "../templates/templateMap";
+import API_URL from "../services/api";
 
 const PublicPortfolio = () => {
   const { username } = useParams();
@@ -13,31 +15,76 @@ const PublicPortfolio = () => {
   // ==========================================
   // FETCH PUBLIC PORTFOLIO
   // ==========================================
+
   useEffect(() => {
     const fetchPortfolio = async () => {
       try {
-        const response = await fetch(
-          `http://localhost:5000/api/public/${username}`
-        );
+        setLoading(true);
+        setError("");
 
-        const data = await response.json();
+        // ========================================
+        // VALIDATE USERNAME
+        // ========================================
 
-        if (!response.ok) {
+        if (!username) {
           throw new Error(
-            data.message || "Portfolio not found"
+            "Username is required."
           );
         }
 
-        console.log("PUBLIC PORTFOLIO DATA:", data);
+        // ========================================
+        // PUBLIC PORTFOLIO API
+        // ========================================
+
+        const response = await fetch(
+          `${API_URL}/api/public/${encodeURIComponent(
+            username
+          )}`,
+          {
+            method: "GET",
+          }
+        );
+
+        // ========================================
+        // RESPONSE
+        // ========================================
+
+        const data =
+          await response.json();
+
+        console.log(
+          "PUBLIC PORTFOLIO DATA:",
+          data
+        );
+
+        // ========================================
+        // API ERROR
+        // ========================================
+
+        if (!response.ok) {
+          throw new Error(
+            data.message ||
+              "Portfolio not found"
+          );
+        }
+
+        // ========================================
+        // SAVE PORTFOLIO DATA
+        // ========================================
 
         setPortfolio(data);
+
       } catch (error) {
         console.error(
           "Public Portfolio Error:",
           error
         );
 
-        setError(error.message);
+        setError(
+          error.message ||
+            "Portfolio not found"
+        );
+
       } finally {
         setLoading(false);
       }
@@ -49,10 +96,26 @@ const PublicPortfolio = () => {
   // ==========================================
   // LOADING
   // ==========================================
+
   if (loading) {
     return (
       <div className="public-portfolio">
-        <h2>Loading Portfolio...</h2>
+
+        <Helmet>
+          <title>
+            Loading Portfolio | CodeFolio
+          </title>
+
+          <meta
+            name="robots"
+            content="noindex, nofollow"
+          />
+        </Helmet>
+
+        <h2>
+          Loading Portfolio...
+        </h2>
+
       </div>
     );
   }
@@ -60,11 +123,13 @@ const PublicPortfolio = () => {
   // ==========================================
   // ERROR
   // ==========================================
-  if (error) {
+
+  if (error || !portfolio) {
     return (
       <div className="public-portfolio">
 
         <Helmet>
+
           <title>
             Portfolio Not Found | CodeFolio
           </title>
@@ -78,11 +143,17 @@ const PublicPortfolio = () => {
             name="robots"
             content="noindex, nofollow"
           />
+
         </Helmet>
 
-        <h2>Portfolio Not Found</h2>
+        <h2>
+          Portfolio Not Found
+        </h2>
 
-        <p>{error}</p>
+        <p>
+          {error ||
+            "The requested portfolio could not be found."}
+        </p>
 
       </div>
     );
@@ -91,20 +162,61 @@ const PublicPortfolio = () => {
   // ==========================================
   // PORTFOLIO DATA
   // ==========================================
-  const { user, projects, skills } = portfolio;
+
+  const {
+    user,
+    projects = [],
+    skills = [],
+  } = portfolio;
+
+  // ==========================================
+  // SAFETY CHECK
+  // ==========================================
+
+  if (!user) {
+    return (
+      <div className="public-portfolio">
+
+        <Helmet>
+
+          <title>
+            Portfolio Not Found | CodeFolio
+          </title>
+
+          <meta
+            name="robots"
+            content="noindex, nofollow"
+          />
+
+        </Helmet>
+
+        <h2>
+          Portfolio Not Found
+        </h2>
+
+        <p>
+          User information is unavailable.
+        </p>
+
+      </div>
+    );
+  }
 
   // ==========================================
   // DYNAMIC SEO DATA
   // ==========================================
 
   const portfolioName =
-    user.name || user.username;
+    user.name?.trim() ||
+    user.username ||
+    "Developer";
 
   const portfolioProfession =
-    user.profession || "Developer";
+    user.profession?.trim() ||
+    "Developer";
 
   const portfolioBio =
-    user.bio ||
+    user.bio?.trim() ||
     `View ${portfolioName}'s ${portfolioProfession} portfolio on CodeFolio.`;
 
   // ==========================================
@@ -119,35 +231,50 @@ const PublicPortfolio = () => {
   // ==========================================
 
   const portfolioUrl =
-    `${window.location.origin}/${user.username}`;
+    `${window.location.origin}/${encodeURIComponent(
+      user.username
+    )}`;
+
+  // ==========================================
+  // SOCIAL LINKS
+  // ==========================================
+
+  const socialLinks =
+    user.socialLinks || {};
 
   // ==========================================
   // JSON-LD STRUCTURED DATA
   // ==========================================
 
   const structuredData = {
-    "@context": "https://schema.org",
+    "@context":
+      "https://schema.org",
 
-    "@type": "Person",
+    "@type":
+      "Person",
 
-    name: portfolioName,
+    name:
+      portfolioName,
 
-    jobTitle: portfolioProfession,
+    jobTitle:
+      portfolioProfession,
 
-    url: portfolioUrl,
+    url:
+      portfolioUrl,
 
-    description: portfolioBio,
+    description:
+      portfolioBio,
 
     ...(user.profileImage && {
       image: user.profileImage,
     }),
 
-    ...(user.socialLinks && {
+    ...(socialLinks && {
       sameAs: [
-        user.socialLinks.github,
-        user.socialLinks.linkedin,
-        user.socialLinks.twitter,
-        user.socialLinks.website,
+        socialLinks.github,
+        socialLinks.linkedin,
+        socialLinks.twitter,
+        socialLinks.website,
       ].filter(Boolean),
     }),
   };
@@ -157,7 +284,9 @@ const PublicPortfolio = () => {
   // ==========================================
 
   const SelectedTemplate =
-    templateMap[user.templateId] ||
+    templateMap[
+      user.templateId
+    ] ||
     templateMap.minimalist;
 
   // ==========================================
@@ -165,23 +294,32 @@ const PublicPortfolio = () => {
   // ==========================================
 
   const templateData = {
-    username: user.username,
+    username:
+      user.username || "",
 
-    name: user.name,
+    name:
+      user.name || "",
 
-    profession: user.profession || "",
+    profession:
+      user.profession || "",
 
-    bio: user.bio,
+    bio:
+      user.bio || "",
 
-    profileImage: user.profileImage,
+    profileImage:
+      user.profileImage || "",
 
-    resumeUrl: user.resumeUrl,
+    resumeUrl:
+      user.resumeUrl || "",
 
-    socialLinks: user.socialLinks,
+    socialLinks:
+      socialLinks,
 
-    skills: skills,
+    skills:
+      skills,
 
-    projects: projects,
+    projects:
+      projects,
   };
 
   // ==========================================
@@ -190,53 +328,69 @@ const PublicPortfolio = () => {
 
   return (
     <>
+
       {/* ======================================
           SEO
       ====================================== */}
 
       <Helmet>
 
-        {/* Page Title */}
+        {/* ====================================
+            PAGE TITLE
+        ==================================== */}
+
         <title>
           {pageTitle}
         </title>
 
-        {/* Meta Description */}
+        {/* ====================================
+            META DESCRIPTION
+        ==================================== */}
+
         <meta
           name="description"
           content={portfolioBio}
         />
 
-        {/* Keywords */}
+        {/* ====================================
+            KEYWORDS
+        ==================================== */}
+
         <meta
           name="keywords"
           content={`${portfolioName}, ${portfolioProfession}, developer, portfolio, CodeFolio, ${user.username}`}
         />
 
-        {/* Author */}
+        {/* ====================================
+            AUTHOR
+        ==================================== */}
+
         <meta
           name="author"
           content={portfolioName}
         />
 
-        {/* Robots */}
+        {/* ====================================
+            ROBOTS
+        ==================================== */}
+
         <meta
           name="robots"
           content="index, follow"
         />
 
-        {/* ==================================
+        {/* ====================================
             CANONICAL
-        ================================== */}
+        ==================================== */}
 
         <link
           rel="canonical"
           href={portfolioUrl}
         />
 
-        {/* ==================================
+        {/* ====================================
             OPEN GRAPH
-        ================================== */}
+        ==================================== */}
 
         <meta
           property="og:title"
@@ -270,9 +424,9 @@ const PublicPortfolio = () => {
           />
         )}
 
-        {/* ==================================
+        {/* ====================================
             TWITTER CARD
-        ================================== */}
+        ==================================== */}
 
         <meta
           name="twitter:card"
@@ -296,12 +450,14 @@ const PublicPortfolio = () => {
           />
         )}
 
-        {/* ==================================
+        {/* ====================================
             JSON-LD
-        ================================== */}
+        ==================================== */}
 
         <script type="application/ld+json">
-          {JSON.stringify(structuredData)}
+          {JSON.stringify(
+            structuredData
+          )}
         </script>
 
       </Helmet>

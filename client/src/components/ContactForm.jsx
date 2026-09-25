@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import API_URL from "../services/api";
 const ContactForm = ({ username }) => {
   const [formData, setFormData] = useState({
     name: "",
@@ -14,8 +14,7 @@ const ContactForm = ({ username }) => {
   // API URL
   // ==========================================
 
-  const API_URL =
-    import.meta.env.VITE_API_URL || "http://localhost:5000";
+
 
   // ==========================================
   // HANDLE INPUT CHANGE

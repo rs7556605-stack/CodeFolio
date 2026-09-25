@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import API_URL from "../services/api";
 
 const SkillList = ({
   onEdit,
@@ -15,24 +16,61 @@ const SkillList = ({
 
   const fetchSkills = async () => {
     try {
+      setLoading(true);
+      setMessage("");
+
+      // ========================================
+      // GET TOKEN
+      // ========================================
+
       const token = localStorage.getItem("token");
 
+      if (!token) {
+        throw new Error(
+          "Session expired. Please login again."
+        );
+      }
+
+      // ========================================
+      // API REQUEST
+      // ========================================
+
       const response = await fetch(
-        "http://localhost:5000/api/skills",
+        `${API_URL}/api/skills`,
         {
+          method: "GET",
+
           headers: {
             Authorization: `Bearer ${token}`,
           },
         }
       );
 
+      // ========================================
+      // RESPONSE
+      // ========================================
+
       const data = await response.json();
+
+      console.log(
+        "Skills API Response:",
+        data
+      );
+
+      // ========================================
+      // API ERROR
+      // ========================================
 
       if (!response.ok) {
         throw new Error(
-          data.message || "Failed to fetch skills"
+          data.message ||
+            "Failed to fetch skills"
         );
       }
+
+      // ========================================
+      // UPDATE SKILLS
+      // ========================================
 
       setSkills(data.skills || []);
 
@@ -42,7 +80,10 @@ const SkillList = ({
         error
       );
 
-      setMessage(error.message);
+      setMessage(
+        error.message ||
+          "Failed to fetch skills"
+      );
 
     } finally {
       setLoading(false);
@@ -62,19 +103,41 @@ const SkillList = ({
   // ==========================================
 
   const handleDelete = async (id) => {
-    const confirmDelete = window.confirm(
-      "Are you sure you want to delete this skill?"
-    );
+    // ========================================
+    // CONFIRM DELETE
+    // ========================================
+
+    const confirmDelete =
+      window.confirm(
+        "Are you sure you want to delete this skill?"
+      );
 
     if (!confirmDelete) {
       return;
     }
 
     try {
-      const token = localStorage.getItem("token");
+      setMessage("");
+
+      // ========================================
+      // GET TOKEN
+      // ========================================
+
+      const token =
+        localStorage.getItem("token");
+
+      if (!token) {
+        throw new Error(
+          "Session expired. Please login again."
+        );
+      }
+
+      // ========================================
+      // DELETE API REQUEST
+      // ========================================
 
       const response = await fetch(
-        `http://localhost:5000/api/skills/${id}`,
+        `${API_URL}/api/skills/${id}`,
         {
           method: "DELETE",
 
@@ -84,16 +147,31 @@ const SkillList = ({
         }
       );
 
-      const data = await response.json();
+      // ========================================
+      // RESPONSE
+      // ========================================
+
+      const data =
+        await response.json();
+
+      console.log(
+        "Delete Skill Response:",
+        data
+      );
+
+      // ========================================
+      // API ERROR
+      // ========================================
 
       if (!response.ok) {
         throw new Error(
-          data.message || "Failed to delete skill"
+          data.message ||
+            "Failed to delete skill"
         );
       }
 
       // ========================================
-      // REMOVE FROM SKILL LIST
+      // REMOVE FROM CURRENT LIST
       // ========================================
 
       setSkills((prevSkills) =>
@@ -110,6 +188,10 @@ const SkillList = ({
         await onSkillDeleted();
       }
 
+      // ========================================
+      // SUCCESS MESSAGE
+      // ========================================
+
       setMessage(
         "Skill deleted successfully ✅"
       );
@@ -120,7 +202,10 @@ const SkillList = ({
         error
       );
 
-      setMessage(error.message);
+      setMessage(
+        error.message ||
+          "Failed to delete skill"
+      );
     }
   };
 
@@ -129,7 +214,15 @@ const SkillList = ({
   // ==========================================
 
   if (loading) {
-    return <p>Loading skills...</p>;
+    return (
+      <div className="skill-list">
+        <h2>Your Skills</h2>
+
+        <p>
+          Loading skills...
+        </p>
+      </div>
+    );
   }
 
   // ==========================================
@@ -139,7 +232,17 @@ const SkillList = ({
   return (
     <div className="skill-list">
 
-      <h2>Your Skills</h2>
+      {/* ========================================
+          TITLE
+      ======================================== */}
+
+      <h2>
+        Your Skills
+      </h2>
+
+      {/* ========================================
+          MESSAGE
+      ======================================== */}
 
       {message && (
         <p className="profile-message">
@@ -147,9 +250,16 @@ const SkillList = ({
         </p>
       )}
 
+      {/* ========================================
+          NO SKILLS
+      ======================================== */}
+
       {skills.length === 0 ? (
-        <p>No skills found.</p>
+        <p>
+          No skills found.
+        </p>
       ) : (
+
         <div className="skills-grid">
 
           {skills.map((skill) => (
@@ -162,15 +272,27 @@ const SkillList = ({
                   SKILL INFORMATION
               ================================= */}
 
-              <div>
+              <div className="skill-info">
+
+                {/* SKILL NAME */}
 
                 <h3>
                   {skill.name}
                 </h3>
 
+                {/* CATEGORY */}
+
                 <span className="skill-category">
                   {skill.category}
                 </span>
+
+                {/* LEVEL */}
+
+                {skill.level && (
+                  <span className="skill-level">
+                    {skill.level}
+                  </span>
+                )}
 
               </div>
 
@@ -185,9 +307,16 @@ const SkillList = ({
                 <button
                   type="button"
                   className="edit-btn"
-                  onClick={() =>
-                    onEdit(skill)
-                  }
+                  onClick={() => {
+                    console.log(
+                      "Edit Skill:",
+                      skill
+                    );
+
+                    if (onEdit) {
+                      onEdit(skill);
+                    }
+                  }}
                 >
                   Edit
                 </button>
@@ -198,7 +327,9 @@ const SkillList = ({
                   type="button"
                   className="delete-btn"
                   onClick={() =>
-                    handleDelete(skill._id)
+                    handleDelete(
+                      skill._id
+                    )
                   }
                 >
                   Delete

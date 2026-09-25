@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import API_URL from "../services/api";
 
 const emptyForm = {
   name: "",
@@ -110,12 +111,26 @@ const SkillForm = ({
     setMessage("");
 
     try {
+      // =====================================================
+      // TOKEN
+      // =====================================================
+
       const token =
         localStorage.getItem("token");
 
       if (!token) {
         throw new Error(
           "Session expired. Please login again."
+        );
+      }
+
+      // =====================================================
+      // VALIDATE SKILL NAME
+      // =====================================================
+
+      if (!formData.name.trim()) {
+        throw new Error(
+          "Please enter a skill name."
         );
       }
 
@@ -158,15 +173,19 @@ const SkillForm = ({
         skillData
       );
 
+      // =====================================================
+      // API RESPONSE VARIABLE
+      // =====================================================
+
       let response;
 
       // =====================================================
-      // UPDATE
+      // UPDATE SKILL
       // =====================================================
 
       if (editSkill) {
         response = await fetch(
-          `http://localhost:5000/api/skills/${editSkill._id}`,
+          `${API_URL}/api/skills/${editSkill._id}`,
           {
             method: "PUT",
 
@@ -186,12 +205,12 @@ const SkillForm = ({
       }
 
       // =====================================================
-      // CREATE
+      // CREATE SKILL
       // =====================================================
 
       else {
         response = await fetch(
-          "http://localhost:5000/api/skills",
+          `${API_URL}/api/skills`,
           {
             method: "POST",
 
@@ -211,11 +230,20 @@ const SkillForm = ({
       }
 
       // =====================================================
-      // RESPONSE
+      // RESPONSE JSON
       // =====================================================
 
       const data =
         await response.json();
+
+      console.log(
+        "Skill API Response:",
+        data
+      );
+
+      // =====================================================
+      // API ERROR
+      // =====================================================
 
       if (!response.ok) {
         throw new Error(
@@ -283,6 +311,10 @@ const SkillForm = ({
   return (
     <div className="skill-form">
 
+      {/* =====================================================
+          TITLE
+      ===================================================== */}
+
       <h2>
         {editSkill
           ? "Edit Skill"
@@ -314,87 +346,91 @@ const SkillForm = ({
 
         </div>
 
-
         {/* =================================================
-            CATEGORY
+            CATEGORY + SKILL LEVEL
         ================================================= */}
 
-        {/* =================================================
-    CATEGORY + SKILL LEVEL
-================================================= */}
+        <div className="skill-category-level-row">
 
-<div className="skill-category-level-row">
+          {/* =================================================
+              CATEGORY
+          ================================================= */}
 
-  {/* CATEGORY */}
+          <div className="form-group">
 
-  <div className="form-group">
+            <label>
+              Category
+            </label>
 
-    <label>
-      Category
-    </label>
+            <select
+              name="category"
+              value={formData.category}
+              onChange={
+                handleCategoryChange
+              }
+            >
 
-    <select
-      name="category"
-      value={formData.category}
-      onChange={handleCategoryChange}
-    >
-      <option value="Frontend">
-        Frontend
-      </option>
+              <option value="Frontend">
+                Frontend
+              </option>
 
-      <option value="Backend">
-        Backend
-      </option>
+              <option value="Backend">
+                Backend
+              </option>
 
-      <option value="DevOps">
-        DevOps
-      </option>
+              <option value="DevOps">
+                DevOps
+              </option>
 
-      <option value="Database">
-        Database
-      </option>
+              <option value="Database">
+                Database
+              </option>
 
-      <option value="Programming">
-        Programming
-      </option>
+              <option value="Programming">
+                Programming
+              </option>
 
-      <option value="Other">
-        Other
-      </option>
-    </select>
+              <option value="Other">
+                Other
+              </option>
 
-  </div>
+            </select>
 
+          </div>
 
-  {/* SKILL LEVEL */}
+          {/* =================================================
+              SKILL LEVEL
+          ================================================= */}
 
-  <div className="form-group">
+          <div className="form-group">
 
-    <label>
-      Skill Level
-    </label>
+            <label>
+              Skill Level
+            </label>
 
-    <select
-      name="level"
-      value={formData.level}
-      onChange={handleChange}
-    >
-      <option value="Beginner">
-        Beginner
-      </option>
+            <select
+              name="level"
+              value={formData.level}
+              onChange={handleChange}
+            >
 
-      <option value="Intermediate">
-        Intermediate
-      </option>
+              <option value="Beginner">
+                Beginner
+              </option>
 
-      <option value="Advanced">
-        Advanced
-      </option>
-    </select>
+              <option value="Intermediate">
+                Intermediate
+              </option>
 
-  </div>
+              <option value="Advanced">
+                Advanced
+              </option>
 
-</div>
+            </select>
+
+          </div>
+
+        </div>
 
         {/* =================================================
             CUSTOM CATEGORY
@@ -425,11 +461,8 @@ const SkillForm = ({
           </div>
         )}
 
-
-       
-
         {/* =================================================
-            BUTTON
+            SUBMIT BUTTON
         ================================================= */}
 
         <button
@@ -444,9 +477,8 @@ const SkillForm = ({
             : "Add Skill"}
         </button>
 
-
         {/* =================================================
-            CANCEL
+            CANCEL BUTTON
         ================================================= */}
 
         {editSkill && (
@@ -462,7 +494,6 @@ const SkillForm = ({
         )}
 
       </form>
-
 
       {/* =================================================
           MESSAGE

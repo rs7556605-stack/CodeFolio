@@ -7,7 +7,7 @@ import SkillForm from "../components/SkillForm";
 import SkillList from "../components/SkillList";
 import TemplatePreview from "../components/TemplatePreview";
 
-
+import API_URL from "../services/api";
 
 const Dashboard = () => {
   // ==========================================
@@ -61,8 +61,10 @@ const Dashboard = () => {
       // ========================================
 
       const profileResponse = await fetch(
-        "http://localhost:5000/api/profile",
+        `${API_URL}/api/profile`,
         {
+          method: "GET",
+
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -72,6 +74,11 @@ const Dashboard = () => {
       const profileData =
         await profileResponse.json();
 
+      console.log(
+        "Profile API Response:",
+        profileData
+      );
+
       if (!profileResponse.ok) {
         throw new Error(
           profileData.message ||
@@ -79,7 +86,9 @@ const Dashboard = () => {
         );
       }
 
-      setPreviewUser(profileData.user);
+      setPreviewUser(
+        profileData.user
+      );
 
       setTemplateId(
         profileData.user?.templateId ||
@@ -91,8 +100,10 @@ const Dashboard = () => {
       // ========================================
 
       const projectsResponse = await fetch(
-        "http://localhost:5000/api/projects",
+        `${API_URL}/api/projects`,
         {
+          method: "GET",
+
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -101,6 +112,11 @@ const Dashboard = () => {
 
       const projectsData =
         await projectsResponse.json();
+
+      console.log(
+        "Projects API Response:",
+        projectsData
+      );
 
       if (!projectsResponse.ok) {
         throw new Error(
@@ -118,8 +134,10 @@ const Dashboard = () => {
       // ========================================
 
       const skillsResponse = await fetch(
-        "http://localhost:5000/api/skills",
+        `${API_URL}/api/skills`,
         {
+          method: "GET",
+
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -128,6 +146,11 @@ const Dashboard = () => {
 
       const skillsData =
         await skillsResponse.json();
+
+      console.log(
+        "Skills API Response:",
+        skillsData
+      );
 
       if (!skillsResponse.ok) {
         throw new Error(
@@ -143,6 +166,7 @@ const Dashboard = () => {
       console.log(
         "Preview refreshed successfully ✅"
       );
+
     } catch (error) {
       console.error(
         "Preview Refresh Error:",
@@ -188,14 +212,17 @@ const Dashboard = () => {
       // ========================================
 
       if (
-        premiumTemplates.includes(newTemplateId) &&
+        premiumTemplates.includes(
+          newTemplateId
+        ) &&
         previewUser?.role !== "pro"
       ) {
         const templateNames = {
           cyberpunk: "Cyberpunk",
           nexus: "Nexus",
           corporate: "Corporate",
-          glassmorphism: "Glassmorphism",
+          glassmorphism:
+            "Glassmorphism",
         };
 
         const templateName =
@@ -229,7 +256,7 @@ const Dashboard = () => {
       // ========================================
 
       const response = await fetch(
-        "http://localhost:5000/api/profile",
+        `${API_URL}/api/profile`,
         {
           method: "PUT",
 
@@ -237,17 +264,24 @@ const Dashboard = () => {
             "Content-Type":
               "application/json",
 
-            Authorization: `Bearer ${token}`,
+            Authorization:
+              `Bearer ${token}`,
           },
 
           body: JSON.stringify({
-            templateId: newTemplateId,
+            templateId:
+              newTemplateId,
           }),
         }
       );
 
       const data =
         await response.json();
+
+      console.log(
+        "Template API Response:",
+        data
+      );
 
       if (!response.ok) {
         throw new Error(
@@ -260,7 +294,9 @@ const Dashboard = () => {
       // UPDATE LOCAL STATE
       // ========================================
 
-      setTemplateId(newTemplateId);
+      setTemplateId(
+        newTemplateId
+      );
 
       setPreviewUser((prev) => {
         if (!prev) {
@@ -269,7 +305,8 @@ const Dashboard = () => {
 
         return {
           ...prev,
-          templateId: newTemplateId,
+          templateId:
+            newTemplateId,
         };
       });
 
@@ -277,13 +314,17 @@ const Dashboard = () => {
         "Template updated successfully:",
         newTemplateId
       );
+
     } catch (error) {
       console.error(
         "Template Error:",
-        error.message
+        error
       );
 
-      alert(error.message);
+      alert(
+        error.message ||
+          "Template update failed"
+      );
     }
   };
 
@@ -305,18 +346,24 @@ const Dashboard = () => {
       }
 
       const response = await fetch(
-        "http://localhost:5000/api/profile/upgrade-demo",
+        `${API_URL}/api/profile/upgrade-demo`,
         {
           method: "POST",
 
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization:
+              `Bearer ${token}`,
           },
         }
       );
 
       const data =
         await response.json();
+
+      console.log(
+        "Pro Upgrade Response:",
+        data
+      );
 
       if (!response.ok) {
         throw new Error(
@@ -330,6 +377,7 @@ const Dashboard = () => {
       );
 
       await refreshPreviewData();
+
     } catch (error) {
       console.error(
         "Demo Pro Upgrade Error:",
@@ -378,7 +426,8 @@ const Dashboard = () => {
   const handleLogout = () => {
     localStorage.removeItem("token");
 
-    window.location.href = "/login";
+    window.location.href =
+      "/login";
   };
 
   // ==========================================
@@ -453,6 +502,7 @@ const Dashboard = () => {
         <header className="dashboard-header">
 
           <div>
+
             <h1>
               Dashboard
             </h1>
@@ -460,6 +510,7 @@ const Dashboard = () => {
             <p>
               Manage your CodeFolio portfolio
             </p>
+
           </div>
 
           {/* HEADER ACTIONS */}
@@ -479,10 +530,6 @@ const Dashboard = () => {
                 ? "👑 PRO"
                 : "FREE"}
             </div>
-
-            {/* RESUME BUILDER */}
-
-           
 
             {/* VIEW PORTFOLIO */}
 
@@ -552,7 +599,9 @@ const Dashboard = () => {
             }}
 
             onProjectUpdated={() => {
-              setEditProject(null);
+              setEditProject(
+                null
+              );
 
               setProjectRefresh(
                 (prev) => prev + 1
@@ -562,7 +611,9 @@ const Dashboard = () => {
             }}
 
             onCancelEdit={() => {
-              setEditProject(null);
+              setEditProject(
+                null
+              );
             }}
           />
 
@@ -630,7 +681,9 @@ const Dashboard = () => {
             }}
 
             onSkillUpdated={() => {
-              setEditSkill(null);
+              setEditSkill(
+                null
+              );
 
               setSkillRefresh(
                 (prev) => prev + 1
@@ -640,7 +693,9 @@ const Dashboard = () => {
             }}
 
             onCancelEdit={() => {
-              setEditSkill(null);
+              setEditSkill(
+                null
+              );
             }}
           />
 
@@ -814,9 +869,6 @@ const Dashboard = () => {
               {templateId}
             </strong>
           </p>
-
-          {/* TEMPLATE DESCRIPTION */}
-
 
           {/* PRO UPGRADE */}
 
