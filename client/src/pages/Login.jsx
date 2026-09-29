@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import API_URL from "../services/api";
@@ -5,25 +6,13 @@ import API_URL from "../services/api";
 const Login = () => {
   const navigate = useNavigate();
 
-  // ==========================================
-  // FORM STATE
-  // ==========================================
-
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
 
-  // ==========================================
-  // UI STATES
-  // ==========================================
-
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
-
-  // ==========================================
-  // HANDLE INPUT CHANGE
-  // ==========================================
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -34,182 +23,88 @@ const Login = () => {
     }));
   };
 
-  // ==========================================
-  // HANDLE LOGIN
-  // ==========================================
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Clear previous message
     setMessage("");
 
-    // Start loading
+    if (!formData.email.trim()) {
+      setMessage("Please enter your email.");
+      return;
+    }
+
+    if (!formData.password) {
+      setMessage("Please enter your password.");
+      return;
+    }
+
     setLoading(true);
 
     try {
-      // ========================================
-      // VALIDATION
-      // ========================================
+      const response = await fetch(`${API_URL}/api/auth/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: formData.email.trim().toLowerCase(),
+          password: formData.password,
+        }),
+      });
 
-      if (!formData.email.trim()) {
-        setMessage("Please enter your email.");
-        setLoading(false);
-        return;
-      }
-
-      if (!formData.password) {
-        setMessage("Please enter your password.");
-        setLoading(false);
-        return;
-      }
-
-      // ========================================
-      // LOGIN API
-      // ========================================
-
-      const response = await fetch(
-        `${API_URL}/api/auth/login`,
-        {
-          method: "POST",
-
-          headers: {
-            "Content-Type":
-              "application/json",
-          },
-
-          body: JSON.stringify({
-            email: formData.email.trim(),
-            password: formData.password,
-          }),
-        }
-      );
-
-      // ========================================
-      // GET RESPONSE
-      // ========================================
-
-      const data =
-        await response.json();
-
-      console.log(
-        "Login API Response:",
-        data
-      );
-
-      // ========================================
-      // API ERROR
-      // ========================================
+      const data = await response.json();
 
       if (!response.ok) {
-        setMessage(
-          data.message ||
-            "Login failed"
-        );
-
-        setLoading(false);
+        setMessage(data.message || "Login failed.");
         return;
       }
 
-      // ========================================
-      // TOKEN CHECK
-      // ========================================
-
-      if (!data.token) {
-        setMessage(
-          "Login successful, but authentication token was not received."
-        );
-
-        setLoading(false);
+      if (!data.token || !data.user) {
+        setMessage("Login response is missing the token or user data.");
         return;
       }
 
-      // ========================================
-      // SAVE TOKEN
-      // ========================================
+      // Remove any previously stored account information.
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
 
-      localStorage.setItem(
-        "token",
-        data.token
+      //
+      // Save the newly authenticated account.
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
+
+      // Verify that user data was saved.
+      console.log("API user:", data.user);
+      console.log(
+        "Saved user:",
+        JSON.parse(localStorage.getItem("user") || "null")
       );
 
-      // ========================================
-      // SUCCESS MESSAGE
-      // ========================================
+      setMessage("Login successful!");
 
-      setMessage(
-        "Login successful ✅"
-      );
-
-      // ========================================
-      // REDIRECT TO DASHBOARD
-      // ========================================
-
-      setTimeout(() => {
-        navigate("/dashboard");
-      }, 800);
-
+      navigate("/dashboard", { replace: true });
     } catch (error) {
-      // ========================================
-      // NETWORK / SERVER ERROR
-      // ========================================
-
-      console.error(
-        "Login Error:",
-        error
-      );
-
-      setMessage(
-        "Server connection failed ❌"
-      );
-
+      console.error("Login Error:", error);
+      setMessage("Server connection failed. Please try again.");
     } finally {
-      // ========================================
-      // STOP LOADING
-      // ========================================
-
       setLoading(false);
     }
   };
 
-  // ==========================================
-  // RENDER
-  // ==========================================
-
   return (
     <div className="auth-page">
-
       <div className="auth-card">
-
-        {/* ====================================
-            TITLE
-        ==================================== */}
-
-        <h1>
-          Welcome Back
-        </h1>
+        <h1>Welcome Back</h1>
 
         <p className="auth-subtitle">
           Login to your CodeFolio account
         </p>
 
-        {/* ====================================
-            LOGIN FORM
-        ==================================== */}
-
-        <form
-          onSubmit={handleSubmit}
-        >
-
-          {/* ==================================
-              EMAIL
-          ================================== */}
-
+        <form onSubmit={handleSubmit}>
           <div className="auth-field">
-
-            <label htmlFor="email">
-              Email
-            </label>
+            <label htmlFor="email">Email</label>
 
             <input
               id="email"
@@ -221,18 +116,10 @@ const Login = () => {
               autoComplete="email"
               required
             />
-
           </div>
 
-          {/* ==================================
-              PASSWORD
-          ================================== */}
-
           <div className="auth-field">
-
-            <label htmlFor="password">
-              Password
-            </label>
+            <label htmlFor="password">Password</label>
 
             <input
               id="password"
@@ -244,51 +131,28 @@ const Login = () => {
               autoComplete="current-password"
               required
             />
-
           </div>
 
-          {/* ==================================
-              MESSAGE
-          ================================== */}
-
           {message && (
-            <p className="auth-message">
+            <p className="auth-message" role="status">
               {message}
             </p>
           )}
-
-          {/* ==================================
-              LOGIN BUTTON
-          ================================== */}
 
           <button
             type="submit"
             className="auth-button"
             disabled={loading}
           >
-            {loading
-              ? "Logging in..."
-              : "Login"}
+            {loading ? "Logging in..." : "Login"}
           </button>
-
         </form>
 
-        {/* ====================================
-            REGISTER LINK
-        ==================================== */}
-
         <p className="auth-footer-text">
-
           Don't have an account?{" "}
-
-          <Link to="/register">
-            Create Account
-          </Link>
-
+          <Link to="/register">Create Account</Link>
         </p>
-
       </div>
-
     </div>
   );
 };
