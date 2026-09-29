@@ -109,7 +109,7 @@
 
 .corporate-hero h1 {
   margin: 18px 0 8px;
-
+margin-bottom: 20px;
   font-size: clamp(48px, 7vw, 78px);
 
   line-height: 1;
@@ -120,7 +120,8 @@
 }
 
 .corporate-hero h2 {
-  margin: 18px 0;
+  margin: 18px  0  0;
+ 
 
   color: #475569;
 

@@ -58,10 +58,7 @@ const Glassmorphism = ({ data }) => {
               </h2>
             )}
 
-            <p className="glass-hero-bio">
-              {user.bio ||
-                "I create modern, useful and beautiful digital experiences."}
-            </p>
+            
 
             <div className="glass-hero-actions">
 

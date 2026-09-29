@@ -178,7 +178,7 @@
 }
 
 .glass-hero h1 {
-  margin: 0;
+  margin-top: 10px;
 
   font-size: clamp(48px, 7vw, 86px);
   line-height: 0.98;
@@ -492,6 +492,7 @@
 
 .glass-section-heading {
   margin-bottom: 40px;
+
 }
 
 .glass-section-heading span {
@@ -505,7 +506,7 @@ line-height: 3;
 .glass-section-heading h2 {
   max-width: 700px;
 text-align: center;
-  margin-left: 170px;
+  margin-left: 20px;
 
   font-size: 35px;
   line-height: 1.1;

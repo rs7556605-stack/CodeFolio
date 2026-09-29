@@ -49,11 +49,6 @@ const Corporate = ({ data }) => {
               </h2>
             )}
 
-            <p className="corporate-bio">
-              {data?.bio ||
-                "Welcome to my professional portfolio."}
-            </p>
-
 
             {/* HERO ACTIONS */}
             <div className="corporate-actions">
