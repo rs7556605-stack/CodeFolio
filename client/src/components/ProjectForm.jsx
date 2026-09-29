@@ -764,7 +764,7 @@ const ProjectForm = ({
             onChange={
               handleChange
             }
-            placeholder="https://github.com/username/project"
+            placeholder="https://..."
           />
 
         </div>
@@ -788,7 +788,7 @@ const ProjectForm = ({
             onChange={
               handleChange
             }
-            placeholder="https://example.com"
+            placeholder="https://..."
           />
 
         </div>
@@ -815,9 +815,7 @@ const ProjectForm = ({
           />
 
           <small>
-            Upload an image. It will
-            be automatically resized
-            and compressed.
+            Upload an image. 
           </small>
 
           {/* IMAGE URL */}
@@ -850,7 +848,7 @@ const ProjectForm = ({
             onChange={
               handleChange
             }
-            placeholder="https://example.com/project.jpg"
+            placeholder="https://..."
           />
 
           {/* IMAGE PROCESSING */}

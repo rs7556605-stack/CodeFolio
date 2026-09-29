@@ -401,7 +401,7 @@ const ProfileForm = ({ onProfileUpdated }) => {
               name="resumeUrl"
               value={formData.resumeUrl}
               onChange={handleChange}
-              placeholder="https://example.com/resume.pdf"
+              placeholder="https://..."
             />
 
             <button
@@ -438,7 +438,7 @@ const ProfileForm = ({ onProfileUpdated }) => {
             name="github"
             value={formData.github}
             onChange={handleChange}
-            placeholder="https://github.com/username"
+            placeholder="https://..."
           />
         </div>
 
@@ -452,7 +452,7 @@ const ProfileForm = ({ onProfileUpdated }) => {
             name="linkedin"
             value={formData.linkedin}
             onChange={handleChange}
-            placeholder="https://linkedin.com/in/username"
+            placeholder="https://..."
           />
         </div>
 
@@ -466,7 +466,7 @@ const ProfileForm = ({ onProfileUpdated }) => {
             name="twitter"
             value={formData.twitter}
             onChange={handleChange}
-            placeholder="https://twitter.com/username"
+            placeholder="https://..."
           />
         </div>
 
@@ -480,7 +480,7 @@ const ProfileForm = ({ onProfileUpdated }) => {
             name="website"
             value={formData.website}
             onChange={handleChange}
-            placeholder="https://yourwebsite.com"
+            placeholder="https://..."
           />
         </div>
 
