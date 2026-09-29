@@ -422,14 +422,16 @@ const Dashboard = () => {
   // ==========================================
   // LOGOUT
   // ==========================================
+const handleLogout = () => {
+  // Current login session remove
+  localStorage.removeItem("token");
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
+  // Current user information remove
+  localStorage.removeItem("user");
 
-    window.location.href =
-      "/login";
-  };
-
+  // Login page par redirect
+  window.location.href = "/login";
+};
   // ==========================================
   // PLAN CHECK
   // ==========================================
