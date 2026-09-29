@@ -1,79 +1,15 @@
+
+const dns = require("dns");
+dns.setDefaultResultOrder("ipv4first");
+
 const nodemailer = require("nodemailer");
 const User = require("../models/User");
 
-const sendContactMessage = async (req, res) => {
-  try {
-    // =====================================================
-    // GET FORM DATA
-    // =====================================================
-
-    const {
-      name,
-      email,
-      message,
-      username,
-    } = req.body;
-
-    // =====================================================
-    // VALIDATION
-    // =====================================================
-
-    if (
-      !name ||
-      !email ||
-      !message ||
-      !username
-    ) {
-      return res.status(400).json({
-        message:
-          "Name, email, message and username are required",
-      });
-    }
-
-    // =====================================================
-    // FIND PORTFOLIO OWNER
-    // =====================================================
-
-    const user = await User.findOne({
-      username: username
-        .trim()
-        .toLowerCase(),
-    });
-
-    if (!user) {
-      return res.status(404).json({
-        message:
-          "Portfolio owner not found",
-      });
-    }
-
-    // =====================================================
-    // CHECK EMAIL CREDENTIALS
-    // =====================================================
-
-    if (
-      !process.env.EMAIL_USER ||
-      !process.env.EMAIL_PASS
-    ) {
-      console.error(
-        "EMAIL_USER or EMAIL_PASS is missing in .env"
-      );
-
-      return res.status(500).json({
-        message:
-          "Email server configuration is missing",
-      });
-    }
-
-    // =====================================================
-    // CREATE GMAIL TRANSPORTER
-    // =====================================================
-
-   
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 465,
   secure: true,
+  family: 4,
 
   auth: {
     user: process.env.EMAIL_USER,
@@ -85,164 +21,65 @@ const transporter = nodemailer.createTransport({
   socketTimeout: 30000,
 });
 
-    // =====================================================
-    // VERIFY SMTP CONNECTION
-    // =====================================================
+const sendContactMessage = async (req, res) => {
+  try {
+    const { name, email, message, username } = req.body;
 
-    await transporter.verify();
+    if (!name || !email || !message || !username) {
+      return res.status(400).json({
+        message: "Name, email, message and username are required",
+      });
+    }
 
-    console.log(
-      "Gmail SMTP verified successfully ✅"
-    );
+    const user = await User.findOne({
+      username: username.trim().toLowerCase(),
+    });
 
-    // =====================================================
-    // EMAIL OPTIONS
-    // =====================================================
+    if (!user) {
+      return res.status(404).json({
+        message: "Portfolio owner not found",
+      });
+    }
+
+    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+      return res.status(500).json({
+        message: "Email server configuration is missing",
+      });
+    }
 
     const mailOptions = {
-      from:
-        `"CodeFolio Contact" <${process.env.EMAIL_USER}>`,
-
-      // Portfolio owner ka registered email
+      from: `"CodeFolio Contact" <${process.env.EMAIL_USER}>`,
       to: user.email,
-
-      // Visitor ko reply karne ke liye
       replyTo: email,
-
-      subject:
-        `New Portfolio Message from ${name}`,
-
-      text: `
-You received a new message through your CodeFolio portfolio.
-
-----------------------------------------
-CONTACT DETAILS
-----------------------------------------
+      subject: `New Portfolio Message from ${name}`,
+      text: `You received a new message through your CodeFolio portfolio.
 
 Name: ${name}
 Email: ${email}
 Portfolio: ${username}
 
-----------------------------------------
-MESSAGE
-----------------------------------------
-
-${message}
-
-----------------------------------------
-
-You can reply directly to this email to contact ${name}.
-      `,
+Message:
+${message}`,
     };
 
-    // =====================================================
-    // SEND EMAIL
-    // =====================================================
+    const info = await transporter.sendMail(mailOptions);
 
-    const info =
-      await transporter.sendMail(
-        mailOptions
-      );
-
-    // =====================================================
-    // EMAIL DEBUG INFORMATION
-    // =====================================================
-
-    console.log(
-      "========== CONTACT EMAIL SENT =========="
-    );
-
-    console.log(
-      "Message ID:",
-      info.messageId
-    );
-
-    console.log(
-      "Accepted:",
-      info.accepted
-    );
-
-    console.log(
-      "Rejected:",
-      info.rejected
-    );
-
-    console.log(
-      "Response:",
-      info.response
-    );
-
-    console.log(
-      "TO:",
-      user.email
-    );
-
-    console.log(
-      "FROM:",
-      process.env.EMAIL_USER
-    );
-
-    console.log(
-      "========================================="
-    );
-
-    // =====================================================
-    // SUCCESS RESPONSE
-    // =====================================================
+    console.log("Contact email sent successfully ✅");
+    console.log("Message ID:", info.messageId);
 
     return res.status(200).json({
-      message:
-        "Message sent successfully ✅",
+      message: "Message sent successfully",
     });
-
   } catch (error) {
-
-    // =====================================================
-    // ERROR LOG
-    // =====================================================
-
-    console.error(
-      "========== CONTACT EMAIL ERROR =========="
-    );
-
-    console.error(
-      "Message:",
-      error.message
-    );
-
-    console.error(
-      "Code:",
-      error.code
-    );
-
-    console.error(
-      "Response:",
-      error.response
-    );
-
-    console.error(
-      "ResponseCode:",
-      error.responseCode
-    );
-
-    console.error(
-      "=========================================="
-    );
-
-    // =====================================================
-    // ERROR RESPONSE
-    // =====================================================
+    console.error("CONTACT EMAIL ERROR:", error.message);
+    console.error("Error code:", error.code);
+    console.error("SMTP response:", error.response);
 
     return res.status(500).json({
-      message:
-        "Failed to send message",
+      message: "Failed to send message",
     });
   }
 };
-
-// =========================================================
-// EXPORT
-// =========================================================
 
 module.exports = {
   sendContactMessage,
