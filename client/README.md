@@ -302,15 +302,14 @@ GitHub: https://github.com/rs7556605-stack
 
 Some features, including production-ready contact delivery, real premium authorization, and custom-domain support, require further implementation or verification.
 
+
 ## Screenshots
 
 ### Login
 ![CodeFolio Login](login.png)
 
 ### Dashboard
-!### Dashboard
 ![CodeFolio Dashboard](dashboard.png)
-
 
 ### Profile Management
 ![Profile Management](profile.png)
@@ -326,3 +325,4 @@ Some features, including production-ready contact delivery, real premium authori
 
 ### Live Preview
 ![CodeFolio Live Preview](Live Preview.png)
+
