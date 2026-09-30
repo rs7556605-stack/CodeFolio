@@ -1,340 +1,309 @@
 # CodeFolio — Developer Portfolio Builder
 
-Build, customize, and publish a professional developer portfolio with **CodeFolio**. Create a portfolio, choose a template, manage your projects and profile information, and share a public portfolio URL.
+CodeFolio is a web-based portfolio builder that allows developers to create, manage, and publish professional portfolio websites. Users can manage their profile, projects, skills, and portfolio templates through a dashboard.
 
-**Live Application:** https://codefolio-web-ey1g.onrender.com
+## Live Demo
 
-**Backend API:** https://codefolio-app.onrender.com
+* **Frontend:** https://codefolio-web-ey1g.onrender.com
+* **Backend:** https://codefolio-app.onrender.com
+* **GitHub Repository:** https://github.com/rs7556605-stack/CodeFolio
 
----
+> Note: The live application may take a little time to respond if the hosting service has put it to sleep.
 
-## Table of Contents
+## Project Overview
 
-* Overview
-* Live Links
-* Features
-* Technology Stack
-* Architecture
-* Getting Started
-* Environment Variables
-* Running Locally
-* API and Deployment Notes
-* Security Notes
-* Testing Checklist
-* Roadmap
-* Contributing
-* License
-* Author
+Creating a professional portfolio website can require web development knowledge, coding skills, and time. CodeFolio aims to simplify this process by providing a dashboard for managing portfolio content and displaying it through selectable templates.
 
----
+The project focuses on authentication, content management, CRUD operations, dynamic template rendering, and public portfolio pages.
 
-## 1. Overview
+## Key Features
 
-CodeFolio is a web-based portfolio builder designed for developers who want to create and publish their professional portfolios without building every portfolio page from scratch.
+* **User Authentication:** User registration and login with JWT-based authentication.
+* **Profile Management:** Create and update portfolio profile information.
+* **Project Management:** Add, edit, display, and delete projects.
+* **Skills Management:** Manage technical skills and skill categories.
+* **Dynamic Templates:** Display portfolio content using selectable templates.
+* **Public Portfolio:** Publish portfolio content through a username-based URL.
+* **Dashboard:** Manage portfolio information from a centralized interface.
+* **Responsive Interface:** Support desktop, tablet, and mobile layouts.
+* **Protected API Routes:** Require authentication for protected operations.
+* **Contact Form:** Includes a contact feature intended to send messages to the portfolio owner. Production contact-flow verification is still pending.
 
-The application provides a dashboard for managing portfolio content, customizable templates, public portfolio URLs, and a contact form for visitors.
+## Technology Stack
 
-The project uses React for the frontend, Node.js and Express.js for the backend, and MongoDB for persistent data storage.
+### Frontend
 
-## 2. Live Links
+* React.js
+* JavaScript
+* HTML5
+* CSS3
+* React Router
 
-| Resource      | URL                                               |
-| ------------- | ------------------------------------------------- |
-| Live Frontend | https://codefolio-web-ey1g.onrender.com           |
-| Backend API   | https://codefolio-app.onrender.com                |
-| Login API     | https://codefolio-app.onrender.com/api/auth/login |
+### Backend
 
-The backend API root provides a service status response. Individual API endpoints may require authentication and specific HTTP methods.
+* Node.js
+* Express.js
+* REST API
+* JSON Web Token (JWT)
 
-## 3. Features
+### Database
 
-### Authentication and Dashboard
+* MongoDB
+* MongoDB Atlas
 
-* User signup and login.
-* Dashboard access after successful authentication.
-* Dashboard continues working after page refresh.
-* Portfolio management through the dashboard.
+### Email Integration
 
-### Portfolio Management
+* Resend API
 
-* Create new portfolios.
-* Edit existing portfolio information.
-* Delete portfolios.
-* Publish public portfolio pages.
-* Share public portfolio URLs.
-* Access public portfolios without signing in.
+### Deployment
 
-### Dynamic Template System
+* Render
 
-* Choose from available portfolio templates.
-* Customize portfolio presentation.
-* Display template changes on the public portfolio page.
+## System Architecture
 
-### Contact Form
-
-* Visitors can submit messages through public portfolio pages.
-* Email integration using the Resend API.
-* Configurable sender and recipient email settings.
-
-**Note:** Production email delivery to arbitrary recipients requires an appropriately verified sending domain and sender address in Resend.
-
-### Responsive Design
-
-* Responsive user interface for desktop and mobile devices.
-* Portfolio pages designed for sharing with recruiters and potential clients.
-
-### Free and Pro Features
-
-* Free and Pro access concepts.
-* Premium template and feature restrictions.
-* Pro-only functionality should be protected through backend authorization, not just frontend visibility.
-
-## 4. Technology Stack
-
-| Layer             | Technology    |
-| ----------------- | ------------- |
-| Frontend          | React.js      |
-| Backend           | Node.js       |
-| Backend Framework | Express.js    |
-| Database          | MongoDB       |
-| Cloud Database    | MongoDB Atlas |
-| Email Service     | Resend API    |
-| Hosting           | Render        |
-| Communication     | REST API      |
-
-## 5. System Architecture
-
-```text
-                 Users and Visitors
-                         |
-                         v
-                React Frontend
-                     Render
-                         |
-                    HTTPS / REST
-                         |
-                         v
-                Node.js + Express
-                     Render
-                    /        \
-                   /          \
-                  v            v
-            MongoDB Atlas   Resend API
-            Portfolio Data  Contact Emails
-```
-
-### Request Flow
+CodeFolio follows a client-server architecture.
 
 1. The user interacts with the React frontend.
-2. The frontend sends an HTTP request to the backend API.
-3. Express processes the request and validates the input.
-4. Authentication and authorization are checked for protected operations.
-5. MongoDB stores or retrieves application data.
-6. For contact-form submissions, the backend uses Resend to send emails.
+2. The frontend sends HTTP requests to the Express.js backend.
+3. Authentication middleware validates JWTs for protected endpoints.
+4. The backend processes requests and interacts with MongoDB when required.
+5. The frontend displays the returned data in the dashboard or public portfolio.
 
-## 6. Getting Started
+```text
+User
+  |
+  v
+React Frontend
+  |
+  | HTTP / REST API
+  v
+Node.js + Express Backend
+  |
+  +------ Authentication Middleware
+  |
+  +------ Controllers and Routes
+  |
+  v
+MongoDB Atlas
+
+Public Visitor
+  |
+  v
+Username-Based Portfolio Page
+  |
+  v
+Selected Portfolio Template
+```
+
+## Main Modules
+
+### 1. Authentication Module
+
+* User registration and login.
+* JWT-based authentication.
+* Protected dashboard and API access.
+
+### 2. Profile CMS
+
+* Fetch profile information.
+* Update portfolio profile details.
+* Display profile information on the portfolio page.
+
+### 3. Project Management
+
+* Create projects.
+* Fetch saved projects.
+* Edit project information.
+* Delete projects.
+
+### 4. Skills Management
+
+* Add and retrieve skills.
+* Update skill information.
+* Delete skills.
+* Organize skills using categories where supported by the interface.
+
+### 5. Portfolio Template System
+
+* Select a portfolio template.
+* Map user portfolio data to the selected template.
+* Display portfolio information on a public username-based route.
+
+### 6. Dashboard
+
+* Centralized portfolio management.
+* Profile, projects, and skills management.
+* Access to available portfolio features.
+
+## Security Measures
+
+* JWT-based authentication for protected operations.
+* Authentication middleware for validating access tokens.
+* Unauthorized requests are rejected.
+* Backend access checks help prevent users from modifying another user's projects.
+* Sensitive configuration values are stored in environment variables rather than intentionally exposed in frontend source code.
+
+**Security note:** These describe implemented and tested behaviors, not a complete independent security audit. JWT logout currently removes the token from browser storage; this does not automatically revoke an already-issued token on the server.
+
+## Environment Configuration
+
+Configure the required environment variables in your local backend environment. Use the actual variable names expected by the server code.
+
+Typical configuration categories include:
+
+* MongoDB connection string.
+* JWT secret.
+* Frontend origin allowlist for CORS.
+* Resend API key.
+* Verified sender email address for outgoing messages.
+* Optional contact-test recipient email.
+
+Create a `.env` file in the appropriate backend directory and add the values required by your implementation.
+
+**Important:** Never commit `.env` files, API keys, database credentials, or JWT secrets to GitHub. Add secret files to `.gitignore`.
+
+## Local Development Setup
 
 ### Prerequisites
 
-Install the following tools:
+* Node.js and npm.
+* MongoDB Atlas account or another supported MongoDB instance.
+* Git.
 
-* Node.js
-* npm
-* MongoDB Atlas account or another MongoDB instance
-* Git
-* Resend account, if testing email functionality
-
-### Clone the Repository
-
-Replace the placeholder with your actual GitHub repository URL.
+### 1. Clone the repository
 
 ```bash
 git clone https://github.com/rs7556605-stack/CodeFolio.git
-cd <YOUR_PROJECT_FOLDER>
+cd CodeFolio
 ```
 
-### Install Dependencies
+### 2. Install dependencies
 
-Run the following command inside the frontend directory:
+Install dependencies in the frontend and backend directories according to the repository structure.
 
 ```bash
+cd client
 npm install
 ```
 
-Run it separately inside the backend directory:
+Then install backend dependencies:
 
 ```bash
+cd ../server
 npm install
 ```
 
-If the frontend and backend are located in separate repositories, clone and configure each repository separately.
+> If your actual folder names or `package.json` locations differ, adjust these commands to match the repository.
 
-## 7. Environment Variables
+### 3. Configure environment variables
 
-Create a `.env` file in the backend directory and configure the environment variables required by your application.
+Create the backend `.env` file and configure the required database, authentication, CORS, and email settings. Do not publish the values.
 
-Example variable names:
+### 4. Start the backend
 
-```env
-PORT=5000
-MONGODB_URI=your_mongodb_connection_string
-JWT_SECRET=your_jwt_secret
-RESEND_API_KEY=your_resend_api_key
-RESEND_FROM_EMAIL=your_verified_sender_email
-CONTACT_TEST_EMAIL=your_test_recipient_email
-```
-
-These are example names. Confirm the exact variable names used in your backend source code before configuring them.
-
-### Security Warning
-
-* Never commit `.env` files to GitHub.
-* Never expose database credentials or API keys in frontend code.
-* Store production secrets in Render's environment settings.
-* If a secret is accidentally published, revoke or rotate it.
-
-### Resend Email Configuration
-
-For production email delivery:
-
-1. Use a domain you own.
-2. Add and verify that domain in Resend.
-3. Configure the DNS records requested by Resend.
-4. Set `RESEND_FROM_EMAIL` to an address on the verified domain.
-5. Add the Resend API key to the backend environment settings on Render.
-6. Test email delivery to an external recipient you control.
-
-The Resend testing sender, such as `onboarding@resend.dev`, is restricted and should not be treated as a production sender for arbitrary recipients.
-
-## 8. Running Locally
-
-### Start the Backend
-
-Open a terminal in the backend directory:
-
-```bash
-npm run dev
-```
-
-If your project uses a different development script, use the command defined in its `package.json`.
-
-### Start the Frontend
-
-Open another terminal in the frontend directory:
+From the backend directory, run the script defined in its `package.json`, for example:
 
 ```bash
 npm start
 ```
 
-The frontend and backend should run using the local configuration defined in your project.
+### 5. Start the frontend
 
-Ensure the frontend API configuration points to the correct backend URL for the environment you are using.
+Open a separate terminal, move to the frontend directory, and run:
 
-## 9. API and Deployment Notes
-
-### Production URLs
-
-Frontend:
-
-https://codefolio-web-ey1g.onrender.com
-
-Backend:
-
-https://codefolio-app.onrender.com
-
-### Authentication Endpoint
-
-```text
-POST /api/auth/login
+```bash
+npm start
 ```
 
-Full URL:
+Use the local URLs printed by the development servers.
 
-```text
-https://codefolio-app.onrender.com/api/auth/login
+## Testing and Validation
+
+The following behaviors have been reported as tested during development:
+
+* User registration and login.
+* Rejection of an incorrect password.
+* Protected dashboard access.
+* Profile save and refresh.
+* Project creation, editing, persistence, and deletion.
+* Skills management.
+* Public portfolio rendering.
+* Template switching.
+* Responsive layouts.
+* Rejection of requests with missing or invalid authentication tokens.
+* Prevention of tested cross-user project access.
+
+These are development test results, not a claim that every possible scenario has been tested.
+
+## Current Limitations and Future Improvements
+
+* Complete production verification of the contact form, portfolio-owner lookup, and email delivery.
+* Implement real subscription and payment processing if premium plans are introduced.
+* Add server-side premium feature authorization; current Pro functionality is a demo.
+* Complete custom-domain support, including domain ownership verification and SSL setup.
+* Expand automated unit, integration, and end-to-end testing.
+* Improve error handling, monitoring, and deployment diagnostics.
+* Add further portfolio templates and customization options.
+
+## Screenshots
+
+Add genuine screenshots of the running application to a `docs/screenshots/` folder in the repository.
+
+Suggested screenshots:
+
+1. Login and registration page.
+2. Dashboard.
+3. Profile management form.
+4. Project management section.
+5. Skills management section.
+6. Template selection or preview.
+7. Public portfolio page.
+8. Mobile-responsive layout.
+
+After adding the screenshots, embed them in this README using relative paths. For example:
+
+```markdown
+![CodeFolio Dashboard](docs/screenshots/dashboard.png)
 ```
 
-The login endpoint returned HTTP 200 during the reported production test.
+Replace the example path with the actual screenshot filename.
 
-A browser `OPTIONS` request with status `204 No Content` can be a normal CORS preflight request. When debugging login, inspect the actual `POST` request as well.
+## Internship Demonstration Checklist
 
-For production, ensure that the frontend API configuration uses the deployed backend URL rather than `localhost`.
+* Register or log in to the application.
+* Open the dashboard.
+* Update profile information and refresh to verify persistence.
+* Create, edit, and delete a project.
+* Add or update skills.
+* Select a portfolio template.
+* Open the public portfolio URL.
+* Demonstrate authentication protection.
+* Show the responsive interface.
+* Explain the architecture, database, API routes, and future improvements.
 
-## 10. Security Notes
+## Learning Outcomes
 
-Before using CodeFolio with real users, verify the following:
+This project provides practical experience with:
 
-* Passwords are securely hashed before storage.
-* Protected API routes validate authentication tokens.
-* Users cannot modify another user's private portfolio.
-* Free and Pro permissions are enforced on the backend.
-* Input validation is implemented on sensitive endpoints.
-* Error responses do not expose secrets or stack traces.
-* CORS is configured for the intended origins.
-* Database credentials and API keys remain private.
-* Contact-form submissions have appropriate validation and abuse protection.
-* Public portfolio pages expose only information intended to be public.
+* Full-stack web application development.
+* React component-based UI development.
+* REST API design using Express.js.
+* MongoDB data modeling and CRUD operations.
+* JWT-based authentication.
+* Dynamic template rendering.
+* Environment configuration and deployment.
+* Debugging and integration testing.
 
-These are security recommendations and have not been independently verified through a formal security audit.
-
-## 11. Testing Checklist
-
-The following production tests have been reported as passing:
-
-* [x] Login and signup
-* [x] Dashboard opens after login
-* [x] Dashboard continues working after refresh
-* [x] Portfolio creation
-* [x] Portfolio editing
-* [x] Portfolio deletion
-* [x] Public portfolio opens in an incognito window
-* [x] Template changes appear on the public portfolio
-* [x] Contact-form submission and email receipt
-* [x] Mobile responsiveness
-
-### Additional Recommended Tests
-
-* [x] Verify production email delivery to a recipient other than the Resend account owner.
-* [ ] Verify Free and Pro authorization on backend endpoints.
-* [ ] Test unauthorized access to another user's portfolio.
-* [ ] Create two polished demo portfolios.
-* [ ] Add application screenshots.
-* [ ] Confirm setup commands match the actual repository structure.
-* [ ] Verify no secrets are committed to GitHub.
-
-## 12. Roadmap
-
-* [ ] Finalize two demo portfolio profiles.
-* [ ] Add screenshots and a product walkthrough.
-* [ ] Complete the system design document.
-* [ ] Complete production email domain verification.
-* [ ] Perform a final security review.
-* [ ] Add automated tests for authentication and portfolio operations.
-* [ ] Improve project documentation.
-
-## 13. Contributing
-
-Contributions and suggestions are welcome.
-
-1. Fork the repository.
-2. Create a new branch for your changes.
-3. Implement and test your changes.
-4. Open a pull request with a description of your updates.
-
-Before submitting changes, ensure that no secrets or private configuration files are included.
-
-## 14. License
-
-No license has been specified yet.
-
-Add a `LICENSE` file to the repository and update this section before allowing others to reuse, modify, or distribute the project.
-
-## 15. Author
+## Author
 
 **Rupak Singh**
 
-Project: **CodeFolio — Developer Portfolio Builder**
+Integrated MCA — Pursuing
 
-Live Application: https://codefolio-web-ey1g.onrender.com
+GitHub: https://github.com/rs7556605-stack
 
-Backend API: https://codefolio-app.onrender.com
+## Project Status
+
+**Status:** Internship project / ongoing development.
+
+Some features, including production-ready contact delivery, real premium authorization, and custom-domain support, require further implementation or verification.
