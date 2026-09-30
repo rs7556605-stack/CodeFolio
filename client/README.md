@@ -308,19 +308,21 @@ Some features, including production-ready contact delivery, real premium authori
 ![CodeFolio Login](login.png)
 
 ### Dashboard
-![dashboard.png]
+!### Dashboard
+![CodeFolio Dashboard](dashboard.png)
+
 
 ### Profile Management
-![Profile Management](CodeFolio/profile.png)
+![Profile Management](profile.png)
 
 ### Project Management
-![Project Management](CodeFolio/project.png)
+![Project Management](project.png)
 
 ### Skills Management
-![Skills Management](CodeFolio/skill.png)
+![Skills Management](skill.png)
 
 ### Resume
-![CodeFolio Resume](CodeFolio/resume.png)
+![CodeFolio Resume](resume.png)
 
 ### Live Preview
-![CodeFolio Live Preview](CodeFolio/Live Preview.png)
+![CodeFolio Live Preview](Live Preview.png)
