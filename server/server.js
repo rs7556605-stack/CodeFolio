@@ -1,6 +1,4 @@
-const dns = require("dns");
 
-dns.setDefaultResultOrder("ipv4first");
 const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
@@ -20,8 +18,28 @@ const app = express();
 // Database
 connectDB();
 
-// Middleware
-app.use(cors());
+// CORS Configuration
+const allowedOrigins = (process.env.CORS_ORIGINS || "")
+  .split(",")
+  .map((origin) => origin.trim())
+  .filter(Boolean);
+
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      // Allow requests without an Origin header, e.g. server-side tools.
+      if (!origin || allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      return callback(new Error("Origin not allowed by CORS"));
+    },
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
+
 app.use(express.json());
 
 // Routes
