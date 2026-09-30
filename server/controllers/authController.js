@@ -1,9 +1,9 @@
+
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
 const User = require("../models/User");
 
-// Same response for existing and non-existing email addresses.
 const RESET_REQUEST_MESSAGE =
   "If an account exists for this email, a password reset link will be sent.";
 
@@ -14,15 +14,28 @@ const registerUser = async (req, res) => {
   try {
     const { username, email, password, name } = req.body || {};
 
-    if (!username || !email || !password) {
+    if (
+      typeof username !== "string" ||
+      !username.trim() ||
+      typeof email !== "string" ||
+      !email.trim() ||
+      typeof password !== "string" ||
+      !password
+    ) {
       return res.status(400).json({
-        message: "Username, email and password are required",
+        message: "Username, email and password are required.",
       });
     }
 
     if (password.length < 8) {
       return res.status(400).json({
-        message: "Password must be at least 8 characters long",
+        message: "Password must be at least 8 characters long.",
+      });
+    }
+
+    if (Buffer.byteLength(password, "utf8") > 72) {
+      return res.status(400).json({
+        message: "Password must not exceed 72 bytes.",
       });
     }
 
@@ -38,7 +51,7 @@ const registerUser = async (req, res) => {
 
     if (existingUser) {
       return res.status(400).json({
-        message: "Username or email already exists",
+        message: "Username or email already exists.",
       });
     }
 
@@ -48,7 +61,7 @@ const registerUser = async (req, res) => {
       username: normalizedUsername,
       email: normalizedEmail,
       password: hashedPassword,
-      name: name || "",
+      name: typeof name === "string" ? name.trim() : "",
     });
 
     return res.status(201).json({
@@ -65,7 +78,7 @@ const registerUser = async (req, res) => {
 
     if (error.code === 11000) {
       return res.status(400).json({
-        message: "Username or email already exists",
+        message: "Username or email already exists.",
       });
     }
 
@@ -82,9 +95,14 @@ const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body || {};
 
-    if (!email || !password) {
+    if (
+      typeof email !== "string" ||
+      !email.trim() ||
+      typeof password !== "string" ||
+      !password
+    ) {
       return res.status(400).json({
-        message: "Email and password are required",
+        message: "Email and password are required.",
       });
     }
 
@@ -159,13 +177,13 @@ const forgotPassword = async (req, res) => {
 
     if (!email) {
       return res.status(400).json({
-        message: "Email is required",
+        message: "Email is required.",
       });
     }
 
     const user = await User.findOne({ email });
 
-    // Do not reveal whether this email is registered.
+    // Do not reveal whether an account exists.
     if (!user) {
       return res.status(200).json({
         message: RESET_REQUEST_MESSAGE,
@@ -178,7 +196,7 @@ const forgotPassword = async (req, res) => {
 
     if (!frontendUrl || !resendApiKey || !senderEmail) {
       console.error(
-        "Password reset email configuration is incomplete"
+        "Password reset email configuration is incomplete."
       );
 
       return res.status(503).json({
@@ -186,10 +204,10 @@ const forgotPassword = async (req, res) => {
       });
     }
 
-    // Generate a cryptographically secure random token.
+    // Generate a secure, 64-character hexadecimal token.
     const resetToken = crypto.randomBytes(32).toString("hex");
 
-    // Store only the SHA-256 hash in MongoDB.
+    // Store only its SHA-256 hash in MongoDB.
     const hashedToken = crypto
       .createHash("sha256")
       .update(resetToken)
@@ -209,7 +227,6 @@ const forgotPassword = async (req, res) => {
     const emailHtml = `
       <div style="font-family: Arial, sans-serif; line-height: 1.6;">
         <h2>Reset your CodeFolio password</h2>
-
         <p>We received a request to reset your password.</p>
 
         <p>
@@ -229,11 +246,7 @@ const forgotPassword = async (req, res) => {
         </p>
 
         <p>This link expires in 15 minutes.</p>
-
-        <p>
-          If you did not request a password reset, you can ignore
-          this email.
-        </p>
+        <p>If you did not request this, you can ignore this email.</p>
       </div>
     `;
 
@@ -264,16 +277,18 @@ const forgotPassword = async (req, res) => {
           providerError
         );
 
-        throw new Error("Password reset email could not be sent");
+        throw new Error("Password reset email could not be sent.");
       }
     } catch (emailError) {
-      // Invalidate the token if email delivery could not be initiated.
+      // Invalidate the token if sending the request fails.
       user.passwordResetToken = undefined;
       user.passwordResetExpires = undefined;
       await user.save();
 
       throw emailError;
     }
+
+    console.log("Password reset email request accepted by Resend.");
 
     return res.status(200).json({
       message: RESET_REQUEST_MESSAGE,
@@ -296,7 +311,17 @@ const resetPassword = async (req, res) => {
     const { token } = req.params;
     const { password } = req.body || {};
 
-    if (!token || !/^[a-f0-9]{64}$/i.test(token)) {
+    // Validate the token format before querying MongoDB.
+    const isValidTokenFormat =
+      typeof token === "string" &&
+      /^[a-f0-9]{64}$/i.test(token);
+
+    console.log(
+      "Reset request received. Token format valid:",
+      isValidTokenFormat
+    );
+
+    if (!isValidTokenFormat) {
       return res.status(400).json({
         message: "Invalid or expired reset link. Request a new one.",
       });
@@ -308,36 +333,70 @@ const resetPassword = async (req, res) => {
       });
     }
 
-    // Avoid excessively large password inputs.
     if (Buffer.byteLength(password, "utf8") > 72) {
       return res.status(400).json({
         message: "Password must not exceed 72 bytes.",
       });
     }
 
+    // Hash the token received from the reset URL.
     const hashedToken = crypto
       .createHash("sha256")
       .update(token)
       .digest("hex");
 
+    // First find the matching hash, including expired records.
     const user = await User.findOne({
       passwordResetToken: hashedToken,
-      passwordResetExpires: { $gt: new Date() },
     }).select("+passwordResetToken +passwordResetExpires");
 
+    console.log(
+      "Reset token matched database record:",
+      Boolean(user)
+    );
+
     if (!user) {
+      console.warn(
+        "Reset failed: token hash did not match a database record."
+      );
+
       return res.status(400).json({
         message: "Invalid or expired reset link. Request a new one.",
       });
     }
 
+    const now = new Date();
+    const expiry = user.passwordResetExpires;
+
+    console.log(
+      "Reset token expiry is valid:",
+      expiry instanceof Date &&
+        !Number.isNaN(expiry.getTime()) &&
+        expiry > now
+    );
+
+    if (
+      !(expiry instanceof Date) ||
+      Number.isNaN(expiry.getTime()) ||
+      expiry <= now
+    ) {
+      console.warn("Reset failed: token has expired.");
+
+      return res.status(400).json({
+        message: "Invalid or expired reset link. Request a new one.",
+      });
+    }
+
+    // Update the password.
     user.password = await bcrypt.hash(password, 10);
 
-    // One-time token: invalidate it immediately after use.
+    // Invalidate the one-time token.
     user.passwordResetToken = undefined;
     user.passwordResetExpires = undefined;
 
     await user.save();
+
+    console.log("Password reset completed successfully.");
 
     return res.status(200).json({
       message: "Password reset successful. Please log in.",
@@ -375,6 +434,9 @@ const getMe = async (req, res) => {
   }
 };
 
+// ===============================
+// EXPORT CONTROLLERS
+// ===============================
 module.exports = {
   registerUser,
   loginUser,
