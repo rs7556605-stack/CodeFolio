@@ -306,7 +306,7 @@ Some features, including production-ready contact delivery, real premium authori
 ## Screenshots
 
 ### Login
-![CodeFolio Login](login.png)
+login.png
 
 ### Dashboard
 ![CodeFolio Dashboard](dashboard.png)
