@@ -1,11 +1,10 @@
-const mongoose= require("mongoose");
-const { type } = require("node:os");
-const userSchema=new mongoose.Schema(
-    {
-        username:{
-        type: String,
-        
-         required: true,
+const mongoose = require("mongoose");
+
+const userSchema = new mongoose.Schema(
+  {
+    username: {
+      type: String,
+      required: true,
       unique: true,
       trim: true,
       lowercase: true,
@@ -24,16 +23,29 @@ const userSchema=new mongoose.Schema(
       required: true,
     },
 
+    // Password-reset fields are excluded from normal queries.
+    passwordResetToken: {
+      type: String,
+      select: false,
+    },
+
+    passwordResetExpires: {
+      type: Date,
+      select: false,
+    },
+
     name: {
       type: String,
       trim: true,
       default: "",
     },
-profession: {
-  type: String,
-  trim: true,
-  default: "",
-},
+
+    profession: {
+      type: String,
+      trim: true,
+      default: "",
+    },
+
     bio: {
       type: String,
       trim: true,

@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import API_URL from "../services/api";
@@ -27,13 +26,10 @@ const Login = () => {
     e.preventDefault();
     setMessage("");
 
-    if (!formData.email.trim()) {
-      setMessage("Please enter your email.");
-      return;
-    }
+    const email = formData.email.trim().toLowerCase();
 
-    if (!formData.password) {
-      setMessage("Please enter your password.");
+    if (!email || !formData.password) {
+      setMessage("Please enter your email and password.");
       return;
     }
 
@@ -46,7 +42,7 @@ const Login = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          email: formData.email.trim().toLowerCase(),
+          email,
           password: formData.password,
         }),
       });
@@ -59,30 +55,16 @@ const Login = () => {
       }
 
       if (!data.token || !data.user) {
-        setMessage("Login response is missing the token or user data.");
+        setMessage("Login response is incomplete.");
         return;
       }
 
-      // Remove any previously stored account information.
-      localStorage.removeItem("token");
-      localStorage.removeItem("user");
-
-      //
-      // Save the newly authenticated account.
+      // Clear previous account data before saving the new account.
       localStorage.removeItem("token");
       localStorage.removeItem("user");
 
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", JSON.stringify(data.user));
-
-      // Verify that user data was saved.
-      console.log("API user:", data.user);
-      console.log(
-        "Saved user:",
-        JSON.parse(localStorage.getItem("user") || "null")
-      );
-
-      setMessage("Login successful!");
 
       navigate("/dashboard", { replace: true });
     } catch (error) {
@@ -96,10 +78,10 @@ const Login = () => {
   return (
     <div className="auth-page">
       <div className="auth-card">
-        <h1>Welcome Back</h1>
+        <h1>Sign in to your account</h1>
 
         <p className="auth-subtitle">
-          Login to your CodeFolio account
+          Welcome back! Please enter your details.
         </p>
 
         <form onSubmit={handleSubmit}>
@@ -131,6 +113,12 @@ const Login = () => {
               autoComplete="current-password"
               required
             />
+
+            <div className="forgot-password-row">
+              <Link to="/forgot-password">
+                Forgot password?
+              </Link>
+            </div>
           </div>
 
           {message && (
@@ -144,7 +132,7 @@ const Login = () => {
             className="auth-button"
             disabled={loading}
           >
-            {loading ? "Logging in..." : "Login"}
+            {loading ? "Logging in..." : "Sign In"}
           </button>
         </form>
 
