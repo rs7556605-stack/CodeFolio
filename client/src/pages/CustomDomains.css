@@ -14,16 +14,12 @@
   margin-bottom: 28px;
 }
 
-.domains-eyebrow {
-  color: #6558e8;
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 2px;
-}
+
 
 .domains-header h1 {
   margin: 8px 0;
-  font-size: 32px;
+  font-size: 28px;
+  text-align: left;
 }
 
 .domains-header p,
@@ -31,6 +27,7 @@
 .domains-list-heading p {
   color: #697386;
   line-height: 1.6;
+  font-size: 15px;
 }
 
 .domains-badge {
@@ -49,6 +46,7 @@
   border-radius: 16px;
   background: #fff;
   box-shadow: 0 5px 22px rgba(30, 41, 59, 0.04);
+  text-align: left;
 }
 
 .domains-card h2 {
@@ -255,3 +253,85 @@
     flex-direction: column;
   }
 }
+
+
+
+/* Domain action buttons */
+.domain-item-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Verify DNS button */
+.verify-domain-btn {
+  padding: 9px 15px;
+  border: 1px solid #c7d2fe;
+  border-radius: 8px;
+  background: #eef2ff;
+  color: #4338ca;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.verify-domain-btn:hover:not(:disabled) {
+  background: #4338ca;
+  color: #fff;
+}
+
+/* Delete button */
+.delete-domain-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 9px 15px;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  background: #fee2e2;
+  color: #b91c1c;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.delete-domain-btn:hover:not(:disabled) {
+  background: #dc2626;
+  border-color: #dc2626;
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(220, 38, 38, 0.18);
+  transform: translateY(-1px);
+}
+
+.verify-domain-btn:disabled,
+.delete-domain-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Mobile layout */
+@media (max-width: 600px) {
+  .domain-item-actions {
+    justify-content: flex-start;
+    width: 100%;
+    margin-top: 12px;
+  }
+
+  .delete-domain-btn,
+  .verify-domain-btn {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+}
+
+
+
+
+
+

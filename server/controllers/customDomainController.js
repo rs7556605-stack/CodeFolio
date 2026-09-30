@@ -1,7 +1,6 @@
 
 const crypto = require("crypto");
 const dns = require("dns").promises;
-
 const CustomDomain = require("../models/CustomDomain");
 
 // ==========================================
@@ -29,7 +28,7 @@ exports.addCustomDomain = async (req, res) => {
       });
     }
 
-    // Prevent mapping CodeFolio's own hosting domain
+    // Prevent using CodeFolio's own hosting domain
     if (
       normalizedDomain === "codefolio-web-ey1g.onrender.com" ||
       normalizedDomain.endsWith(".codefolio-web-ey1g.onrender.com")
@@ -39,7 +38,6 @@ exports.addCustomDomain = async (req, res) => {
       });
     }
 
-    // Authentication middleware sets req.user to the user ID
     const userId = req.user;
 
     if (!userId) {
@@ -48,7 +46,7 @@ exports.addCustomDomain = async (req, res) => {
       });
     }
 
-    // Check whether this domain is already registered
+    // Check if domain already exists
     const existingDomain = await CustomDomain.findOne({
       domain: normalizedDomain,
     });
@@ -59,7 +57,7 @@ exports.addCustomDomain = async (req, res) => {
       });
     }
 
-    // Generate a secure ownership verification token
+    // Generate verification token
     const verificationToken = crypto.randomBytes(32).toString("hex");
 
     const customDomain = await CustomDomain.create({
@@ -71,14 +69,12 @@ exports.addCustomDomain = async (req, res) => {
 
     return res.status(201).json({
       message: "Custom domain added successfully",
-
       domain: {
         id: customDomain._id,
         domain: customDomain.domain,
         status: customDomain.status,
         createdAt: customDomain.createdAt,
       },
-
       verification: {
         type: "TXT",
         host: `_codefolio.${normalizedDomain}`,
@@ -143,7 +139,7 @@ exports.verifyCustomDomain = async (req, res) => {
       });
     }
 
-    // Only the domain owner can verify this domain
+    // Only the owner can verify their domain
     const customDomain = await CustomDomain.findOne({
       _id: id,
       userId,
@@ -164,15 +160,14 @@ exports.verifyCustomDomain = async (req, res) => {
 
     const recordName = `_codefolio.${customDomain.domain}`;
 
-    // Resolve TXT records from DNS
+    // Resolve DNS TXT records
     const records = await dns.resolveTxt(recordName);
 
     const expectedValue =
       `codefolio-verification=${customDomain.verificationToken}`;
 
-    // DNS TXT records can contain multiple string segments
-    const isVerified = records.some((record) =>
-      record.join("") === expectedValue
+    const isVerified = records.some(
+      (record) => record.join("") === expectedValue
     );
 
     if (!isVerified) {
@@ -182,7 +177,6 @@ exports.verifyCustomDomain = async (req, res) => {
       });
     }
 
-    // Update verification status only after token matches
     customDomain.status = "verified";
     customDomain.verifiedAt = new Date();
 
@@ -214,6 +208,50 @@ exports.verifyCustomDomain = async (req, res) => {
 
     return res.status(500).json({
       message: "Unable to verify custom domain",
+    });
+  }
+};
+
+// ==========================================
+// DELETE CUSTOM DOMAIN
+// ==========================================
+exports.deleteCustomDomain = async (req, res) => {
+  try {
+    const userId = req.user;
+    const { id } = req.params;
+
+    if (!userId) {
+      return res.status(401).json({
+        message: "Authentication required",
+      });
+    }
+
+    // Delete only the domain belonging to the logged-in user
+    const domain = await CustomDomain.findOneAndDelete({
+      _id: id,
+      userId,
+    });
+
+    if (!domain) {
+      return res.status(404).json({
+        message: "Domain not found",
+      });
+    }
+
+    return res.status(200).json({
+      message: "Domain deleted successfully",
+    });
+  } catch (error) {
+    if (error.name === "CastError") {
+      return res.status(400).json({
+        message: "Invalid domain ID",
+      });
+    }
+
+    console.error("Delete Domain Error:", error.message);
+
+    return res.status(500).json({
+      message: "Failed to delete domain",
     });
   }
 };

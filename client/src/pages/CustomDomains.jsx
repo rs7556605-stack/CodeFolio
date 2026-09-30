@@ -9,6 +9,7 @@ function CustomDomains() {
   const [loading, setLoading] = useState(true);
   const [adding, setAdding] = useState(false);
   const [verifyingId, setVerifyingId] = useState("");
+  const [deletingId, setDeletingId] = useState("");
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
   const [verification, setVerification] = useState(null);
@@ -20,6 +21,9 @@ function CustomDomains() {
     "Content-Type": "application/json",
   };
 
+  // ==========================================
+  // FETCH DOMAINS
+  // ==========================================
   async function fetchDomains() {
     setLoading(true);
     setError("");
@@ -45,10 +49,12 @@ function CustomDomains() {
 
   useEffect(() => {
     fetchDomains();
-    // Load domains when this page opens.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // ==========================================
+  // ADD DOMAIN
+  // ==========================================
   async function handleAddDomain(event) {
     event.preventDefault();
     setMessage("");
@@ -89,6 +95,9 @@ function CustomDomains() {
     }
   }
 
+  // ==========================================
+  // VERIFY DOMAIN
+  // ==========================================
   async function handleVerify(domain) {
     setMessage("");
     setError("");
@@ -121,6 +130,61 @@ function CustomDomains() {
     }
   }
 
+  // ==========================================
+  // DELETE DOMAIN
+  // ==========================================
+  async function handleDeleteDomain(domain) {
+    const domainId = domain._id;
+
+    if (!domainId) {
+      setError("Domain ID not found.");
+      return;
+    }
+
+    const confirmed = window.confirm(
+      `Are you sure you want to delete "${domain.domain}"? This action cannot be undone.`
+    );
+
+    if (!confirmed) return;
+
+    setMessage("");
+    setError("");
+    setDeletingId(domainId);
+
+    try {
+      const response = await fetch(
+        `${API_URL}/api/domains/${domainId}`,
+        {
+          method: "DELETE",
+          headers: requestHeaders,
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Failed to delete domain");
+      }
+
+      // Remove deleted domain from the UI immediately
+      setDomains((previousDomains) =>
+        previousDomains.filter((item) => item._id !== domainId)
+      );
+
+      // Clear verification instructions if they belong to the deleted domain
+      setVerification(null);
+
+      setMessage(data.message || "Domain deleted successfully.");
+    } catch (err) {
+      setError(err.message || "Unable to delete domain");
+    } finally {
+      setDeletingId("");
+    }
+  }
+
+  // ==========================================
+  // COPY TEXT
+  // ==========================================
   async function copyText(value) {
     try {
       await navigator.clipboard.writeText(value);
@@ -131,11 +195,13 @@ function CustomDomains() {
     }
   }
 
+  // ==========================================
+  // UI
+  // ==========================================
   return (
     <main className="custom-domains-page">
       <header className="domains-header">
         <div>
-          <p className="domains-eyebrow">CODEFOLIO PRO</p>
           <h1>Custom Domains</h1>
           <p>
             Manage your domain names and verify domain ownership.
@@ -157,10 +223,11 @@ function CustomDomains() {
         </div>
       )}
 
+      {/* ADD DOMAIN */}
       <section className="domains-card">
         <h2>Add a custom domain</h2>
         <p>
-          Enter a domain you own, for example, portfolio.example.com.
+          Enter a domain you own, for example: portfolio.example.com.
         </p>
 
         <form onSubmit={handleAddDomain} className="domain-add-form">
@@ -168,7 +235,7 @@ function CustomDomains() {
             type="text"
             value={domainInput}
             onChange={(event) => setDomainInput(event.target.value)}
-            placeholder="portfolio.yourdomain.com"
+            placeholder="Enter your domain name"
             aria-label="Domain name"
             autoComplete="url"
             required
@@ -180,6 +247,7 @@ function CustomDomains() {
         </form>
       </section>
 
+      {/* DNS VERIFICATION INSTRUCTIONS */}
       {verification && (
         <section className="domains-card verification-card">
           <h2>DNS verification instructions</h2>
@@ -223,6 +291,7 @@ function CustomDomains() {
         </section>
       )}
 
+      {/* DOMAIN LIST */}
       <section className="domains-card">
         <div className="domains-list-heading">
           <div>
@@ -236,7 +305,7 @@ function CustomDomains() {
             onClick={fetchDomains}
             disabled={loading}
           >
-            Refresh
+            {loading ? "Refreshing..." : "Refresh"}
           </button>
         </div>
 
@@ -253,6 +322,7 @@ function CustomDomains() {
               <article className="domain-item" key={domain._id}>
                 <div className="domain-item-info">
                   <h3>{domain.domain}</h3>
+
                   <span
                     className={`domain-status ${
                       domain.status === "verified"
@@ -264,23 +334,43 @@ function CustomDomains() {
                   </span>
                 </div>
 
-                {domain.status !== "verified" && (
+                <div className="domain-item-actions">
+                  {domain.status !== "verified" && (
+                    <button
+                      type="button"
+                      className="verify-domain-btn"
+                      onClick={() => handleVerify(domain)}
+                      disabled={
+                        verifyingId === domain._id ||
+                        deletingId === domain._id
+                      }
+                    >
+                      {verifyingId === domain._id
+                        ? "Checking DNS..."
+                        : "Verify DNS"}
+                    </button>
+                  )}
+
+                  {domain.status === "verified" && (
+                    <span className="verified-label">
+                      Ownership verified
+                    </span>
+                  )}
+
                   <button
                     type="button"
-                    onClick={() => handleVerify(domain)}
-                    disabled={verifyingId === domain._id}
+                    className="delete-domain-btn"
+                    onClick={() => handleDeleteDomain(domain)}
+                    disabled={
+                      deletingId === domain._id ||
+                      verifyingId === domain._id
+                    }
                   >
-                    {verifyingId === domain._id
-                      ? "Checking DNS..."
-                      : "Verify DNS"}
+                    {deletingId === domain._id
+                      ? "Deleting..."
+                      : " Delete"}
                   </button>
-                )}
-
-                {domain.status === "verified" && (
-                  <span className="verified-label">
-                    Ownership verified
-                  </span>
-                )}
+                </div>
               </article>
             ))}
           </div>

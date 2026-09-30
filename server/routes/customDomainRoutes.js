@@ -8,6 +8,7 @@ const {
   addCustomDomain,
   getMyDomains,
   verifyCustomDomain,
+  deleteCustomDomain,
 } = require("../controllers/customDomainController");
 
 const router = express.Router();
@@ -26,5 +27,8 @@ router.get("/", getMyDomains);
 
 // Verify custom domain ownership using DNS TXT
 router.post("/:id/verify", verifyCustomDomain);
+
+// Delete a custom domain
+router.delete("/:id", deleteCustomDomain);
 
 module.exports = router;

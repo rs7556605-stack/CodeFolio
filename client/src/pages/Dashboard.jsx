@@ -492,7 +492,7 @@ const handleLogout = () => {
   href="/custom-domains"
   className="sidebar-resume-link"
 >
-  🌐 Custom Domains
+  Custom Domains
 </a>
         </nav>
 
