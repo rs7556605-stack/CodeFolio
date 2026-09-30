@@ -486,7 +486,14 @@ const handleLogout = () => {
           >
             Resume Builder
           </a>
+          {/* CUSTOM DOMAINS */}
 
+<a
+  href="/custom-domains"
+  className="sidebar-resume-link"
+>
+  🌐 Custom Domains
+</a>
         </nav>
 
       </aside>

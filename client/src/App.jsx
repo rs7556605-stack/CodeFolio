@@ -10,6 +10,7 @@ import ResumeBuilder from "./pages/ResumeBuilder";
 import PublicResume from "./pages/PublicResume";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
+import CustomDomains from "./pages/CustomDomains";
 
 import "./App.css";
 
@@ -62,6 +63,11 @@ function App() {
 <Route
   path="/reset-password/:token"
   element={<ResetPassword />}
+/>
+
+<Route
+  path="/custom-domains"
+  element={<CustomDomains />}
 />
         </Routes>
       </BrowserRouter>

@@ -1,0 +1,257 @@
+
+.custom-domains-page {
+  min-height: 100vh;
+  padding: 40px;
+  background: #f5f7fb;
+  color: #172033;
+}
+
+.domains-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 28px;
+}
+
+.domains-eyebrow {
+  color: #6558e8;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.domains-header h1 {
+  margin: 8px 0;
+  font-size: 32px;
+}
+
+.domains-header p,
+.domains-card > p,
+.domains-list-heading p {
+  color: #697386;
+  line-height: 1.6;
+}
+
+.domains-badge {
+  padding: 10px 15px;
+  border-radius: 30px;
+  background: #e9e7ff;
+  color: #5546d8;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.domains-card {
+  margin-bottom: 22px;
+  padding: 26px;
+  border: 1px solid #e5e9f2;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 5px 22px rgba(30, 41, 59, 0.04);
+}
+
+.domains-card h2 {
+  margin-top: 0;
+  font-size: 20px;
+}
+
+.domain-add-form {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.domain-add-form input {
+  flex: 1;
+  min-width: 0;
+  padding: 13px 15px;
+  border: 1px solid #dce1eb;
+  border-radius: 9px;
+  outline: none;
+  font-size: 14px;
+}
+
+.domain-add-form input:focus {
+  border-color: #6558e8;
+  box-shadow: 0 0 0 3px rgba(101, 88, 232, 0.12);
+}
+
+.custom-domains-page button {
+  padding: 11px 16px;
+  border: none;
+  border-radius: 9px;
+  background: #6558e8;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.custom-domains-page button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.custom-domains-page .secondary-button {
+  border: 1px solid #dce1eb;
+  background: #fff;
+  color: #344054;
+}
+
+.domains-alert {
+  margin-bottom: 18px;
+  padding: 14px 16px;
+  border-radius: 9px;
+}
+
+.domains-alert.success {
+  background: #e8f8ef;
+  color: #167443;
+}
+
+.domains-alert.error {
+  background: #fff0f0;
+  color: #b42318;
+}
+
+.dns-field {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 15px;
+  padding: 13px;
+  border: 1px solid #e5e9f2;
+  border-radius: 9px;
+}
+
+.dns-field > span {
+  min-width: 100px;
+  color: #697386;
+  font-size: 13px;
+}
+
+.dns-field code {
+  flex: 1;
+  overflow-wrap: anywhere;
+  color: #4338ca;
+}
+
+.dns-field button {
+  flex-shrink: 0;
+}
+
+.dns-instructions {
+  margin-top: 18px;
+  color: #697386;
+  line-height: 1.6;
+}
+
+.domains-list-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.domain-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 0;
+  border-top: 1px solid #edf0f5;
+}
+
+.domain-item-info {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.domain-item h3 {
+  margin: 0;
+  overflow-wrap: anywhere;
+  font-size: 15px;
+}
+
+.domain-status {
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.domain-status.pending {
+  background: #fff3d6;
+  color: #946200;
+}
+
+.domain-status.verified {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.verified-label {
+  color: #16834a;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.domains-empty {
+  padding: 24px 0;
+  text-align: center;
+  color: #697386;
+}
+
+.domains-empty h3 {
+  color: #344054;
+}
+
+.domains-note {
+  color: #697386;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+@media (max-width: 640px) {
+  .custom-domains-page {
+    padding: 20px 14px;
+  }
+
+  .domains-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .domains-header h1 {
+    font-size: 27px;
+  }
+
+  .domains-card {
+    padding: 18px;
+  }
+
+  .domain-add-form {
+    flex-direction: column;
+  }
+
+  .domain-add-form button {
+    width: 100%;
+  }
+
+  .dns-field {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .dns-field code {
+    min-width: 0;
+  }
+
+  .domain-item {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
