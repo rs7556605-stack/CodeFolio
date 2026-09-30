@@ -2721,3 +2721,32 @@
   }
 }
 
+
+
+
+
+.forgot-password-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 8px;
+}
+
+.forgot-password-row a {
+  color: #2563eb;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.forgot-password-row a:hover {
+  color: #1d4ed8;
+  text-decoration: underline;
+}
+
+.auth-message {
+  overflow-wrap: anywhere;
+  margin: 12px 0;
+  font-size: 14px;
+  line-height: 1.5;
+}

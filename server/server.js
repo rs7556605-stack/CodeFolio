@@ -13,6 +13,7 @@ const skillRoutes = require("./routes/skillRoutes");
 const publicRoutes = require("./routes/publicRoutes");
 const contactRoutes = require("./routes/contactRoutes");
 const resumeRoutes = require("./routes/resumeRoutes");
+const customDomainRoutes = require("./routes/customDomainRoutes");
 const app = express();
 
 // Database
@@ -51,6 +52,7 @@ app.use("/api/skills", skillRoutes);
 app.use("/api/public", publicRoutes);
 app.use("/api/contact", contactRoutes);
 app.use("/api/resume", resumeRoutes);
+app.use("/api/domains", customDomainRoutes);
 // Test Route
 app.get("/", (req, res) => {
   res.json({

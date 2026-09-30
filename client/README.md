@@ -239,7 +239,7 @@ These are development test results, not a claim that every possible scenario has
 
 * Complete production verification of the contact form, portfolio-owner lookup, and email delivery.
 * Implement real subscription and payment processing if premium plans are introduced.
-* Add server-side premium feature authorization; current Pro functionality is a demo.
+* Add server-side premium feature authorization.
 * Complete custom-domain support, including domain ownership verification and SSL setup.
 * Expand automated unit, integration, and end-to-end testing.
 * Improve error handling, monitoring, and deployment diagnostics.
@@ -260,10 +260,48 @@ Suggested screenshots:
 7. Public portfolio page.
 8. Mobile-responsive layout.
 
-After adding the screenshots, embed them in this README using relative paths. For example:
+After adding the screenshots, embed them using their actual relative paths.
 
-```markdown
-![CodeFolio Dashboard](docs/screenshots/dashboard.png)
+## Internship Demonstration Checklist
+
+* Register or log in to the application.
+* Open the dashboard.
+* Update profile information and refresh to verify persistence.
+* Create, edit, and delete a project.
+* Add or update skills.
+* Select a portfolio template.
+* Open the public portfolio URL.
+* Demonstrate authentication protection.
+* Show the responsive interface.
+* Explain the architecture, database, API routes, and future improvements.
+
+## Learning Outcomes
+
+This project provides practical experience with:
+
+* Full-stack web application development.
+* React component-based UI development.
+* REST API design using Express.js.
+* MongoDB data modeling and CRUD operations.
+* JWT-based authentication.
+* Dynamic template rendering.
+* Environment configuration and deployment.
+* Debugging and integration testing.
+
+## Author
+
+**Rupak Singh**
+
+Integrated MCA — Pursuing
+
+GitHub: https://github.com/rs7556605-stack
+
+## Project Status
+
+**Status:** Internship project / ongoing development.
+
+Some features, including production-ready contact delivery, real premium authorization, and custom-domain support, require further implementation or verification.
+
 ```
 
 Replace the example path with the actual screenshot filename.

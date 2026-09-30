@@ -8,6 +8,8 @@ import PublicPortfolio from "./pages/PublicPortfolio";
 import Register from "./pages/Register";
 import ResumeBuilder from "./pages/ResumeBuilder";
 import PublicResume from "./pages/PublicResume";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
 
 import "./App.css";
 
@@ -52,7 +54,15 @@ function App() {
             path="/:username"
             element={<PublicPortfolio />}
           />
+<Route
+  path="/forgot-password"
+  element={<ForgotPassword />}
+/>
 
+<Route
+  path="/reset-password/:token"
+  element={<ResetPassword />}
+/>
         </Routes>
       </BrowserRouter>
     </HelmetProvider>
