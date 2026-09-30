@@ -16,8 +16,8 @@ exports.addCustomDomain = async (req, res) => {
     const normalizedDomain = domain.trim().toLowerCase();
 
     // Simplified domain format validation
-    const domainRegex =
-      /^(?=.{1,253}$)(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,63}$/;
+   const domainRegex =
+  /^(?=.{1,253}$)(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,63}$/;
 
     if (!domainRegex.test(normalizedDomain)) {
       return res.status(400).json({
@@ -37,7 +37,7 @@ exports.addCustomDomain = async (req, res) => {
 
     // This assumes your authentication middleware sets req.user.id.
     // We will verify this against your existing middleware before wiring routes.
-    const userId = req.user?.id;
+    const userId = req.user;
 
     if (!userId) {
       return res.status(401).json({
