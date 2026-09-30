@@ -308,7 +308,7 @@ Some features, including production-ready contact delivery, real premium authori
 ![CodeFolio Login](login.png)
 
 ### Dashboard
-![CodeFolio Dashboard](CodeFolio/dashboard.png)
+!(CodeFolio/dashboard.png)
 
 ### Profile Management
 ![Profile Management](CodeFolio/profile.png)
