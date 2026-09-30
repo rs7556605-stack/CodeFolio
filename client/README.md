@@ -302,46 +302,25 @@ GitHub: https://github.com/rs7556605-stack
 
 Some features, including production-ready contact delivery, real premium authorization, and custom-domain support, require further implementation or verification.
 
-```
+## Screenshots
 
-Replace the example path with the actual screenshot filename.
+### Login
+![CodeFolio Login](CodeFolio/login.png)
 
-## Internship Demonstration Checklist
+### Dashboard
+![CodeFolio Dashboard](CodeFolio/dashboard.png)
 
-* Register or log in to the application.
-* Open the dashboard.
-* Update profile information and refresh to verify persistence.
-* Create, edit, and delete a project.
-* Add or update skills.
-* Select a portfolio template.
-* Open the public portfolio URL.
-* Demonstrate authentication protection.
-* Show the responsive interface.
-* Explain the architecture, database, API routes, and future improvements.
+### Profile Management
+![Profile Management](CodeFolio/profile.png)
 
-## Learning Outcomes
+### Project Management
+![Project Management](CodeFolio/project.png)
 
-This project provides practical experience with:
+### Skills Management
+![Skills Management](CodeFolio/skill.png)
 
-* Full-stack web application development.
-* React component-based UI development.
-* REST API design using Express.js.
-* MongoDB data modeling and CRUD operations.
-* JWT-based authentication.
-* Dynamic template rendering.
-* Environment configuration and deployment.
-* Debugging and integration testing.
+### Resume
+![CodeFolio Resume](CodeFolio/resume.png)
 
-## Author
-
-**Rupak Singh**
-
-Integrated MCA — Pursuing
-
-GitHub: https://github.com/rs7556605-stack
-
-## Project Status
-
-**Status:** Internship project / ongoing development.
-
-Some features, including production-ready contact delivery, real premium authorization, and custom-domain support, require further implementation or verification.
+### Live Preview
+![CodeFolio Live Preview](CodeFolio/Live Preview.png)
