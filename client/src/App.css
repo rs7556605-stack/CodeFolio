@@ -2721,10 +2721,6 @@
   }
 }
 
-
-
-
-
 .forgot-password-row {
   display: flex;
   justify-content: flex-end;
@@ -2749,4 +2745,5 @@
   margin: 12px 0;
   font-size: 14px;
   line-height: 1.5;
+
 }
