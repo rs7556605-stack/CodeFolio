@@ -313,7 +313,7 @@ Some features, including production-ready contact delivery, real premium authori
 ![CodeFolio Dashboard](../dashboard.png)
 
 ### Profile Management
-![Profile Management](../preview1.png)
+![Profile Management](../profile.png)
 
 ### Project Management
 ![Project Management](../project.png)
