@@ -303,22 +303,29 @@ GitHub: https://github.com/rs7556605-stack
 Some features, including production-ready contact delivery, real premium authorization, and custom-domain support, require further implementation or verification.
 
 
+
 ## Screenshots
 
 ### Login
-![CodeFolio Login](docs/screenshots/login.png)
+![CodeFolio Login](../login.png)
 
 ### Dashboard
-![CodeFolio Dashboard](docs/screenshots/dashboard.png)
+![CodeFolio Dashboard](../dashbord.png)
 
 ### Profile Management
-![Profile Management](docs/screenshots/profile.png)
+![Profile Management](../preview1.png)
 
 ### Project Management
-![Project Management](docs/screenshots/projects.png)
+![Project Management](../project.png)
 
 ### Skills Management
-![Skills Management](docs/screenshots/skills.png)
+![Skills Management](../skill.png)
 
 ### Live Preview
-![CodeFolio Live Preview](docs/screenshots/live-preview.png)
+![CodeFolio Live Preview](../Live%20Preview.png)
+
+### Resume Builder
+![Resume Builder](../resume.png)
+
+### Custom Domains
+![Custom Domains](../domain.png)
